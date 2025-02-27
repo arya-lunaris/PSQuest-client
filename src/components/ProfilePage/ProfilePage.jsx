@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
-import { profile } from "../../services/userService"; 
+import { profile, getUserProfile } from "../../services/userService"; 
 import styles from "./profile.module.css";
 
 export default function UpdateProfile() {
-    const { user } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);  
     const { userId } = useParams(); 
     const navigate = useNavigate();
 
@@ -19,8 +19,6 @@ export default function UpdateProfile() {
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
-        console.log("User data in useEffect:", user); 
-
         if (!user) {
             navigate("/login");
             return;
@@ -33,27 +31,18 @@ export default function UpdateProfile() {
 
         setFormData({
             username: user.username || "",
-            email: user.email || "",  
+            email: user.email || "",
             password: "",
             password_confirmation: ""
         });
-
-        console.log("Setting form data with user data:", {
-            username: user.username || "",
-            email: user.email || "" 
-        });
-
     }, [user, userId, navigate]);
 
     const handleChange = (event) => {
-        console.log(`Field ${event.target.name} changed to:`, event.target.value);
         setFormData({ ...formData, [event.target.name]: event.target.value });
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        console.log("Form data being submitted:", formData);
 
         if (formData.password && formData.password !== formData.password_confirmation) {
             setErrors({ password_confirmation: "Passwords do not match" });
@@ -61,20 +50,20 @@ export default function UpdateProfile() {
         }
 
         const updatedFormData = { ...formData };
-        
         if (!formData.password) {
             delete updatedFormData.password;
             delete updatedFormData.password_confirmation;
         }
 
-        console.log("User token in profile update:", user.token);
-
         try {
-            await profile(updatedFormData, user.token);
-            navigate("/collection"); 
+            await profile(updatedFormData);  
+
+            const updatedUser = await getUserProfile();  
+            setUser(updatedUser);  
+
+            navigate("/collection");  
         } catch (error) {
-            console.log("Error while updating profile:", error);
-            setErrors({ general: error.response?.data?.message || "Failed to update profile." });
+            setErrors({ general: error.message || "Failed to update profile." });
         }
     };
 
