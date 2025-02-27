@@ -14,7 +14,7 @@ export const signup = async (formData) => {
 
 export const login = async (formData) => {
     try {
-        const res = await axios.post(`${BASE_URL}/login`, formData);
+        const res = await axios.post(`${BASE_URL}/login/`, formData);
         return res.data;
     } catch (error) {
         console.error("Login error:", error);
@@ -24,7 +24,7 @@ export const login = async (formData) => {
 
 export const updateProfile = async (formData, token) => {
     try {
-        const res = await axios.put(`${BASE_URL}/profile`, formData,
+        const res = await axios.put(`${BASE_URL}/profile/`, formData,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
