@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route } from "react-router-dom";
+import NavMenu from "./components/Navbar/NavMenu";
+import CollectionPage from "./components/CollectionPage/CollectionPage";
+import FullGamePage from "./components/FullGamePage/FullGamePage";
+import HomePage from "./components/HomePage/HomePage";
+import LoginPage from "./components/LoginPage/LoginPage";
+import ProfilePage from "./components/ProfilePage/ProfilePage";
+import SearchPage from "./components/SearchPage/SearchPage";
+import SignupPage from "./components/SignupPage/SignupPage";
+import WishlistPage from "./components/WishlistPage/WishlistPage";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <NavMenu />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/game/:gameId" element={<FullGamePage />} />
+        <Route path="/collection" element={<CollectionPage />} />
+        <Route path="/wishlist" element={<WishlistPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/profile/:userId" element={<ProfilePage />} />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
