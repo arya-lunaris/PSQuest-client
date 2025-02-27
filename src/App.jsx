@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-// import Navbar from "./components/Navbar/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 // import CollectionPage from "./components/CollectionPage/CollectionPage";
 // import FullGamePage from "./components/FullGamePage/FullGamePage";
 // import HomePage from "./components/HomePage/HomePage";
@@ -12,7 +12,7 @@ import SignupPage from "./components/SignupPage/SignupPage";
 function App() {
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <Routes>
         {/* <Route path="/" element={<HomePage />} /> */}
         {/* <Route path="/search" element={<SearchPage />} /> */}

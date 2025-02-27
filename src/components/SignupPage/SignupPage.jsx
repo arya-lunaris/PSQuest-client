@@ -12,7 +12,9 @@ export default function Signup() {
     username: '',
     email: '',
     password: '',
-    password_confirmation: '', 
+    password_confirmation: '',
+    bio: '',
+    profile_picture: '' 
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false); 
@@ -96,6 +98,26 @@ export default function Signup() {
             formData.password !== formData.password_confirmation && (
               <p className="error-message">Passwords do not match</p>
             )}
+        </div>
+
+        <div className={styles['form-group']}>
+          <label htmlFor="bio">Bio</label>
+          <textarea
+            name="bio"
+            id="bio"
+            placeholder="Tell us about yourself"
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className={styles['form-group']}>
+          <label htmlFor="profile_picture">Profile Picture</label>
+          <input
+            type="file"
+            name="profile_picture"
+            id="profile_picture"
+            onChange={handleChange}
+          />
         </div>
 
         <button
