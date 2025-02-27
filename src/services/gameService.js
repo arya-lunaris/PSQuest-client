@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getToken } from "../utils/auth";
 
-const BASE_URL = import.meta.env.VITE_API_URL + "/games";
+const BASE_URL = 'http://127.0.0.1:8000/game';
 
 export const gameIndex = async () => {
   try {
