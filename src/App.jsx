@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 // import FullGamePage from "./components/FullGamePage/FullGamePage";
 // import HomePage from "./components/HomePage/HomePage";
 import LoginPage from "./components/LoginPage/LoginPage";
-// import ProfilePage from "./components/ProfilePage/ProfilePage";
+import ProfilePage from "./components/ProfilePage/ProfilePage";
 // import SearchPage from "./components/SearchPage/SearchPage";
 import SignupPage from "./components/SignupPage/SignupPage";
 // import WishlistPage from "./components/WishlistPage/WishlistPage";
@@ -21,7 +21,7 @@ function App() {
         {/* <Route path="/wishlist" element={<WishlistPage />} /> */}
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
-        {/* <Route path="/profile/:userId" element={<ProfilePage />} /> */}
+        <Route path="/profile/:userId" element={<ProfilePage />} />
       </Routes>
     </>
   );

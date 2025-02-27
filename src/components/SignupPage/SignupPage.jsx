@@ -25,7 +25,7 @@ export default function Signup() {
       const data = await signup(formData); 
       setToken(data.token); 
       setUser(getUserFromToken()); 
-      navigate('/profiles/login'); 
+      navigate('/login'); 
     } catch (error) {
       setErrors(error.response.data.errors); 
     } finally {
