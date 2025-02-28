@@ -12,22 +12,19 @@ const GameCard = ({ game, type, onAdd, onRemove }) => {
       
       <div className="game-card-buttons">
         {type === "search" ? (
-          <>            
+          <>
             <button className="btn-add" onClick={() => onAdd(game)}>Add to Collection</button>
             <button className="btn-add" onClick={() => onAdd(game)}>Add to Wishlist</button>
           </>
-
         ) : type === "wishlist" ? (
           <>
             <button className="btn-add" onClick={() => onAdd(game)}>Move to Collection</button>
             <button className="btn-remove" onClick={() => onRemove(game)}>Remove from Wishlist</button>
           </>
-
         ) : type === "collection" ? (
           <>
             <button className="btn-remove" onClick={() => onRemove(game)}>Remove from Collection</button>
           </>
-          
         ) : null}
       </div>
     </div>

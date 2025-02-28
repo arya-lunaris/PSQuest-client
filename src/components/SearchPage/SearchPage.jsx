@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { gameFetchFromIGDB } from "../../services/gameService";  
-import GameCard from "../../components//GameCard/GameCard";  
+import { saveGameFromIGDB } from "../../services/gameService"; 
+import GameCard from "../../components/GameCard/GameCard";  
 import styles from "./search.module.css";
 
 const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState(""); 
-  const [games, setGames] = useState([]); 
+  const [games, setGames] = useState([]);  
   const [loading, setLoading] = useState(false); 
   const [error, setError] = useState(""); 
   const [searched, setSearched] = useState(false); 
@@ -42,12 +43,14 @@ const SearchPage = () => {
     }
   };
 
-  const handleAddToCollection = (game) => {
-    console.log("Adding to collection:", game);
-  };
+  const handleAddToCollection = async (game) => {
+    try {
+      const savedGame = await saveGameFromIGDB(game);
+      console.log("Game added to collection:", savedGame);
 
-  const handleAddToWishlist = (game) => {
-    console.log("Adding to wishlist:", game);
+    } catch (error) {
+      console.error("Failed to add game to collection", error);
+    }
   };
 
   return (
@@ -69,23 +72,23 @@ const SearchPage = () => {
       {loading && <p>Loading...</p>}
       
       <div className={styles.gameResults}>
-        {searched && games.length === 0 && !loading && <p>No results found.</p>}
+        {searched && games.length === 0 && !loading && <p>No results found</p>}
 
         {!loading && games.length > 0 && games.map((game) => (
           <GameCard
             key={game.id ? game.id : `${game.name}-${Math.random()}`}
             game={{
-                id: game.id,
-                image: game.cover ? game.cover : "placeholder.jpg", 
-                title: game.title,
-                releaseDate: game.first_release_date || "Release Date unavailable", 
-                rating: game.total_rating ? game.total_rating.toFixed(1) : "Rating unavailable", 
-                genres: game.genres && game.genres.length > 0 ? game.genres.join(", ") : "Genres unavailable", 
-                storyline: game.storyline || "Storyline unavailable",        
+              id: game.id,
+              title: game.title,
+              image: game.cover ? game.cover : "placeholder.jpg",
+              releaseDate: game.first_release_date || "Release Date unavailable",
+              rating: game.total_rating ? game.total_rating.toFixed(1) : "Rating unavailable",
+              genres: game.genres && game.genres.length > 0 ? game.genres.join(", ") : "Genres unavailable",
+              storyline: game.storyline || "Storyline unavailable."
             }}
             type="search"
-            onAdd={handleAddToCollection}
-            onRemove={handleAddToWishlist}
+            onAdd={handleAddToCollection} 
+            onRemove={() => {}}  
           />
         ))}
       </div>

@@ -2,6 +2,7 @@ import axios from "axios";
 import { getToken } from "../utils/auth";
 
 const BASE_URL = 'http://127.0.0.1:8000/game';
+const USER_GAMES_URL = 'http://127.0.0.1:8000/user-games'
 
 export const gameIndex = async () => {
   try {
@@ -95,15 +96,18 @@ export const gameFetchFromIGDB = async (searchTerm) => {
 
 
 export const saveGameFromIGDB = async (gameData) => {
-    try {
-      const res = await axios.post(`${BASE_URL}/save`, gameData, {
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-        },
-      });
-      return res.data;
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  };
+  try {
+    const res = await axios.post(`${USER_GAMES_URL}/save-game/`, gameData, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    });
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+
+
