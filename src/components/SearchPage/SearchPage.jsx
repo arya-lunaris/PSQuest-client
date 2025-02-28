@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { gameFetchFromIGDB } from "../../services/gameService";  
+import GameCard from "../../components//GameCard/GameCard";  
 import styles from "./search.module.css";
 
 const SearchPage = () => {
@@ -41,6 +42,14 @@ const SearchPage = () => {
     }
   };
 
+  const handleAddToCollection = (game) => {
+    console.log("Adding to collection:", game);
+  };
+
+  const handleAddToWishlist = (game) => {
+    console.log("Adding to wishlist:", game);
+  };
+
   return (
     <div className={styles.searchPage}>
       <h1>Search for Games</h1>
@@ -57,20 +66,27 @@ const SearchPage = () => {
       </form>
 
       {error && <p className={styles.error}>{error}</p>}
-
       {loading && <p>Loading...</p>}
-
+      
       <div className={styles.gameResults}>
         {searched && games.length === 0 && !loading && <p>No results found.</p>}
+
         {!loading && games.length > 0 && games.map((game) => (
-          <div key={game.id ? game.id : `${game.title}-${Math.random()}`} className={styles.gameItem}> 
-            {game.cover && <img src={game.cover} alt={game.title} className={styles.gameCover} />}
-            <h3>{game.title}</h3>
-            <p>{game.first_release_date}</p>
-            <p>Rating: {game.total_rating}</p>
-            <p>{game.genres.join(", ")}</p>
-            <p>{game.storyline}</p>
-          </div>
+          <GameCard
+            key={game.id ? game.id : `${game.name}-${Math.random()}`}
+            game={{
+                id: game.id,
+                image: game.cover ? game.cover : "placeholder.jpg", 
+                title: game.title,
+                releaseDate: game.first_release_date || "Release Date unavailable", 
+                rating: game.total_rating ? game.total_rating.toFixed(1) : "Rating unavailable", 
+                genres: game.genres && game.genres.length > 0 ? game.genres.join(", ") : "Genres unavailable", 
+                storyline: game.storyline || "Storyline unavailable",        
+            }}
+            type="search"
+            onAdd={handleAddToCollection}
+            onRemove={handleAddToWishlist}
+          />
         ))}
       </div>
     </div>
