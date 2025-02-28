@@ -1,9 +1,11 @@
 import React from "react";
 
-const GameCard = ({ game, type, onAdd, onRemove }) => {
+const GameCard = ({ game, type, onAddToCollection, onAddToWishlist, onRemove }) => {
+  const imageUrl = game.cover || game.image || "https://via.placeholder.com/150"; 
+
   return (
     <div className="game-card">
-      {game.image && <img src={game.image} alt={game.title} className="game-card-image" />}
+      {imageUrl && <img src={imageUrl} alt={game.title} className="game-card-image" />}
       <h3 className="game-card-title">{game.title}</h3>
       <p className="game-card-date">Release Date: {game.releaseDate}</p>
       <p className="game-card-rating">Rating: {game.rating}</p>
@@ -13,12 +15,12 @@ const GameCard = ({ game, type, onAdd, onRemove }) => {
       <div className="game-card-buttons">
         {type === "search" ? (
           <>
-            <button className="btn-add" onClick={() => onAdd(game)}>Add to Collection</button>
-            <button className="btn-add" onClick={() => onAdd(game)}>Add to Wishlist</button>
+            <button className="btn-add" onClick={() => onAddToCollection(game)}>Add to Collection</button>
+            <button className="btn-add" onClick={() => onAddToWishlist(game)}>Add to Wishlist</button>
           </>
         ) : type === "wishlist" ? (
           <>
-            <button className="btn-add" onClick={() => onAdd(game)}>Move to Collection</button>
+            <button className="btn-add" onClick={() => onAddToCollection(game)}>Move to Collection</button>
             <button className="btn-remove" onClick={() => onRemove(game)}>Remove from Wishlist</button>
           </>
         ) : type === "collection" ? (
