@@ -23,9 +23,6 @@ export default function Navbar() {
           <Link to="/search">Search</Link>
         </li>
         <li>
-          <Link to="/game/:gameId">Full Game</Link>
-        </li>
-        <li>
           <Link to="/collection">Collection</Link>
         </li>
         <li>

@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 // import HomePage from "./components/HomePage/HomePage";
 import LoginPage from "./components/LoginPage/LoginPage";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
-// import SearchPage from "./components/SearchPage/SearchPage";
+import SearchPage from "./components/SearchPage/SearchPage";
 import SignupPage from "./components/SignupPage/SignupPage";
 // import WishlistPage from "./components/WishlistPage/WishlistPage";
 
@@ -15,7 +15,7 @@ function App() {
       <Navbar />
       <Routes>
         {/* <Route path="/" element={<HomePage />} /> */}
-        {/* <Route path="/search" element={<SearchPage />} /> */}
+        <Route path="/search" element={<SearchPage />} />
         {/* <Route path="/game/:gameId" element={<FullGamePage />} /> */}
         {/* <Route path="/collection" element={<CollectionPage />} /> */}
         {/* <Route path="/wishlist" element={<WishlistPage />} /> */}

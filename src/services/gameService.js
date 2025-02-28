@@ -75,18 +75,24 @@ export const gameDelete = async (gameId) => {
 
 export const gameFetchFromIGDB = async (searchTerm) => {
   try {
-    const res = await axios.get(`${BASE_URL}/fetch`, {
-      params: { search: searchTerm },
+    const encodedSearchTerm = encodeURIComponent(searchTerm);
+    const url = `${BASE_URL}/fetch-igdb-games/?search=${encodedSearchTerm}`;
+
+    console.log("Making request to:", url);
+
+    const res = await axios.get(url, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },
     });
+
     return res.data;
   } catch (error) {
-    console.log(error);
+    console.log("Error fetching games:", error);
     throw error;
   }
 };
+
 
 export const saveGameFromIGDB = async (gameData) => {
     try {
