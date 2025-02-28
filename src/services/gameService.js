@@ -78,9 +78,6 @@ export const gameFetchFromIGDB = async (searchTerm) => {
   try {
     const encodedSearchTerm = encodeURIComponent(searchTerm);
     const url = `${BASE_URL}/fetch-igdb-games/?search=${encodedSearchTerm}`;
-
-    console.log("Making request to:", url);
-
     const res = await axios.get(url, {
       headers: {
         Authorization: `Bearer ${getToken()}`,

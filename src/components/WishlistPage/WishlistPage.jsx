@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getUserGamesByStatus } from "../../services/usergameService";
+import { getUserGamesByStatus, removeGameFromUser, saveGameFromIGDB } from "../../services/usergameService"; 
 import GameCard from "../../components/GameCard/GameCard"; 
 
 const WishlistPage = () => {
@@ -9,7 +9,7 @@ const WishlistPage = () => {
   useEffect(() => {
     const fetchWishlistGames = async () => {
       try {
-        const games = await getUserGamesByStatus('wishlist'); 
+        const games = await getUserGamesByStatus("wishlist");
         setWishlistGames(games);
         setLoading(false);
       } catch (error) {
@@ -20,6 +20,26 @@ const WishlistPage = () => {
 
     fetchWishlistGames();
   }, []);
+
+  const handleRemove = async (userGameId) => {
+    try {
+      await removeGameFromUser(userGameId); 
+      setWishlistGames((prevGames) => prevGames.filter((g) => g.id !== userGameId)); 
+    } catch (error) {
+      console.error("Failed to remove game from wishlist", error);
+    }
+  };
+
+  const handleMoveToCollection = async (userGame) => {
+    try {
+      const updatedGame = { ...userGame.game, status: 'collection' }; 
+
+      const savedGame = await saveGameFromIGDB(updatedGame); 
+      setWishlistGames((prevGames) => prevGames.filter((g) => g.id !== userGame.id));  
+    } catch (error) {
+      console.error("Error moving game to collection", error);
+    }
+  };
 
   return (
     <div>
@@ -37,19 +57,19 @@ const WishlistPage = () => {
                 const genres = Array.isArray(game.genres) ? game.genres.join(", ") : game.genres || "Genres unavailable";
                 return (
                   <GameCard
-                    key={game.id}
+                    key={userGame.id} 
                     game={{
                       id: game.id,
                       title: game.title,
-                      image: game.cover || 'placeholder.jpg',
-                      releaseDate: game.first_release_date || 'Release Date unavailable',
-                      rating: game.total_rating ? game.total_rating.toFixed(1) : 'Rating unavailable',
+                      image: game.cover || "placeholder.jpg",
+                      releaseDate: game.first_release_date || "Release Date unavailable",
+                      rating: game.total_rating ? game.total_rating.toFixed(1) : "Rating unavailable",
                       genres: genres,
-                      storyline: game.storyline || 'Storyline unavailable.',
+                      storyline: game.storyline || "Storyline unavailable.",
                     }}
                     type="wishlist"
-                    onAdd={() => {}} 
-                    onRemove={() => {}} 
+                    onRemove={() => handleRemove(userGame.id)}  
+                    onMoveToCollection={() => handleMoveToCollection(userGame)}  
                   />
                 );
               })}

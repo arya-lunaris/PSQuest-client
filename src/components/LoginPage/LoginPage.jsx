@@ -25,7 +25,6 @@ export default function Login() {
             setUser(getUserFromToken());
             navigate('/collection'); 
         } catch (error) {
-            console.log("Login error:", error.response?.data);
             setErrors(error.response?.data || { general: 'Invalid login credentials' });
         } finally {
             setLoading(false);

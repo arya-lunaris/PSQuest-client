@@ -29,8 +29,7 @@ const SearchPage = () => {
   
       try {
         const response = await gameFetchFromIGDB(searchTerm);
-        console.log("API Response: ", response);
-  
+          
         if (response.data) {
           setGames(response.data);
         } else {
@@ -47,7 +46,6 @@ const SearchPage = () => {
       try {
         const gameWithStatus = { ...game, status: 'collection' };  
         const savedGame = await saveGameFromIGDB(gameWithStatus); 
-        console.log("Game added to collection:", savedGame);
       } catch (error) {
         console.error("Failed to add game to collection", error);
       }
@@ -57,7 +55,6 @@ const SearchPage = () => {
       try {
         const gameWithStatus = { ...game, status: 'wishlist' };  
         const savedGame = await saveGameFromIGDB(gameWithStatus); 
-        console.log("Game added to wishlist:", savedGame);
       } catch (error) {
         console.error("Failed to add game to wishlist", error);
       }

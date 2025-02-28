@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { getUserGamesByStatus } from "../../services/usergameService"; 
+import { getUserGamesByStatus } from "../../services/usergameService";
 import GameCard from "../../components/GameCard/GameCard"; 
+import { removeGameFromUser } from "../../services/usergameService"; 
 
 const CollectionPage = () => {
   const [collectionGames, setCollectionGames] = useState([]);
@@ -21,6 +22,15 @@ const CollectionPage = () => {
     fetchCollectionGames();
   }, []);
 
+  const handleRemoveFromCollection = async (userGameId) => {
+    try {
+      await removeGameFromUser(userGameId);
+      setCollectionGames(collectionGames.filter(game => game.id !== userGameId)); 
+    } catch (error) {
+      console.error("Failed to remove game from collection", error);
+    }
+  };
+
   return (
     <div>
       <h1>Your Collection</h1>
@@ -37,7 +47,7 @@ const CollectionPage = () => {
                 const genres = Array.isArray(game.genres) ? game.genres.join(", ") : game.genres || 'Genres unavailable';
                 return (
                   <GameCard
-                    key={game.id}
+                    key={userGame.id} 
                     game={{
                       id: game.id,
                       title: game.title,
@@ -48,8 +58,7 @@ const CollectionPage = () => {
                       storyline: game.storyline || 'Storyline unavailable.',
                     }}
                     type="collection"
-                    onAdd={() => {}} 
-                    onRemove={() => {}}  
+                    onRemove={() => handleRemoveFromCollection(userGame.id)}
                   />
                 );
               })}

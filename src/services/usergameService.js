@@ -30,3 +30,17 @@ export const getUserGamesByStatus = async (status) => {
         throw error;
     }
 };
+
+export const removeGameFromUser = async (gameId) => {
+    try {
+        const response = await axios.delete(`${BASE_URL}/${gameId}/`, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Failed to remove game:", error);
+        throw error;
+    }
+};
