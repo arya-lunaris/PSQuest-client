@@ -1,46 +1,51 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
+import './HomePage.css'
 
 const HomePage = () => {
   const { user } = useContext(UserContext);
 
   return (
-    <div>
-      <header>
-        <h1>Welcome to PSQuest</h1>
-        <p>Your journey to discover and track your favourite PlayStation games!</p>
+    <div className="flex flex-col min-h-screen">
+      <header className="text-center mt-12 mb-8">
+        <h1 className="text-3xl text-gray-900">Welcome to PSQuest</h1>
+        <p className="text-lg text-gray-600 mt-2">Your journey to discover and track your favourite PlayStation games!</p>
       </header>
 
       {!user ? (
-        <section>
-          <h2>Sign Up Now!</h2>
-          <p>Join PSQuest and start discovering and tracking your PlayStation games today!</p>
-          <button>
-            <Link to="/signup">Sign Up</Link>
-          </button>
+        <section className="text-center mb-8">
+          <h2 className="text-2xl text-gray-800">Sign Up Now!</h2>
+          <p className="text-gray-700 mt-2 mb-4">Join PSQuest and start discovering and tracking your PlayStation games today!</p>
+          <Link to="/signup">
+            <button className="btn-thin">Sign Up</button>
+          </Link>
         </section>
       ) : (
         <>
-          <nav>
-            <h2>Navigate</h2>
-            <ul>
-              <li><Link to="/collection">Your Games</Link></li>
-              <li><Link to={`/profile/${user.id}`}>Your Profile</Link></li>
+          <nav className="mb-8 text-center">
+            <h2 className="text-2xl text-gray-800">Navigate</h2>
+            <ul className="mt-4 space-y-2">
+              <li>
+                <Link to="/collection" className="btn-thin">Your Games</Link>
+              </li>
+              <li>
+                <Link to={`/profile/${user.id}`} className="btn-thin">Your Profile</Link>
+              </li>
             </ul>
           </nav>
 
-          <section>
-            <h2>See What's Out There!</h2>
-            <p>Explore the best games on PlayStation. Track your progress and share your thoughts!</p>
-            <button>
-              <Link to="/search">Start Looking 👀</Link>
-            </button>
+          <section className="text-center mb-8">
+            <h2 className="text-2xl text-gray-800">See What's Out There!</h2>
+            <p className="text-gray-700 mt-2 mb-4">Explore the best games on PlayStation. Track your progress and share your thoughts!</p>
+            <Link to="/search">
+              <button className="btn-thin">Start Looking</button>
+            </Link>
           </section>
         </>
       )}
 
-      <footer>
+      <footer className="mt-auto text-center text-gray-600 py-4">
         <p>&copy; 2025 PSQuest. All rights reserved.</p>
       </footer>
     </div>
