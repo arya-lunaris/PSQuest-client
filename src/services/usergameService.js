@@ -68,3 +68,28 @@ export const getFullUserGame = async (usergameId) => {
     return data;
   };
 
+export const updateUserGame = async (usergameId, updatedData) => {
+    const token = localStorage.getItem("gsky_token");
+  
+    if (!token) {
+      throw new Error("No token found in localStorage");
+    }
+  
+    const response = await fetch(`${BASE_URL}/${usergameId}/`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(updatedData), 
+    });
+  
+    if (!response.ok) {
+      throw new Error("Failed to update game details");
+    }
+  
+    const data = await response.json();
+    return data;
+  };
+  
+  

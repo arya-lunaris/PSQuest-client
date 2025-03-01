@@ -1,28 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { getFullUserGame } from "../../services/usergameService"; 
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { getFullUserGame, updateUserGame } from "../../services/usergameService";
 
 const FullGamePage = () => {
+  const { usergameId } = useParams();
   const [userGameDetails, setUserGameDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null); 
-  const { usergameId } = useParams();
-  const navigate = useNavigate();
+  const [rating, setRating] = useState(null);
+  const [review, setReview] = useState(""); 
+  const [gameStatus, setGameStatus] = useState(""); 
 
   useEffect(() => {
-    const token = localStorage.getItem("gsky_token");
-
-    if (!token) {
-      console.warn("⚠️ No token found! You will not be able to fetch user game details.");
-      setError("You need to be logged in to view this page.");
-      setLoading(false); 
-      return;
-    }
-
     const fetchUserGameDetails = async () => {
       try {
         const gameDetails = await getFullUserGame(usergameId);
         setUserGameDetails(gameDetails);
+        setRating(gameDetails.rating);
+        setReview(gameDetails.review);
+        setGameStatus(gameDetails.game_status);
       } catch (error) {
         setError("Failed to fetch game details.");
       } finally {
@@ -33,21 +29,24 @@ const FullGamePage = () => {
     if (usergameId) {
       fetchUserGameDetails();
     }
-  }, [usergameId, navigate]); 
+  }, [usergameId]);
+
+  const handleUpdate = async () => {
+    try {
+      const updatedData = { rating, review, game_status: gameStatus };
+      await updateUserGame(usergameId, updatedData);
+    } catch (error) {
+      setError("Failed to update game details.");
+    }
+  };
 
   if (loading) return <p>Loading...</p>;
 
-  if (error) {
-    return <p>{error}</p>; 
-  }
+  if (error) return <p>{error}</p>;
 
   if (!userGameDetails) return <p>Game details not found.</p>;
 
-  const { game, page_status, game_status, rating, review } = userGameDetails;
-  
-  const displayRating = rating !== null ? rating : "No rating yet";
-  const displayReview = review || "No review yet";
-  const displayGameStatus = game_status || "No game status available";
+  const { game } = userGameDetails;
 
   return (
     <div>
@@ -55,12 +54,46 @@ const FullGamePage = () => {
       <img src={game?.cover || "placeholder.jpg"} alt={game?.title || "No Cover"} />
       <p>{game?.first_release_date || "Release Date unavailable"}</p>
       <p>Rating: {game?.total_rating ? game.total_rating.toFixed(1) : "Rating unavailable"}</p>
-      <p>Genres: {game?.genres?.length ? game.genres.join(", ") : "Genres unavailable"}</p>
-      <p>{game?.storyline || "Storyline unavailable"}</p>
+      <p>Genres: {Array.isArray(game?.genres) && game.genres.length ? game.genres.join(", ") : "Genres unavailable"}</p>
+      <p>Description: {game?.storyline || "Storyline unavailable"}</p>
 
-      <p>Game Status: {displayGameStatus}</p>
-      <p>Rating: {displayRating}</p>
-      <p>Review: {displayReview}</p>
+
+      <div>
+        <label>
+          Rating (1-5):
+          <input 
+            type="number" 
+            min="1" 
+            max="5" 
+            value={rating} 
+            onChange={(e) => setRating(e.target.value)} 
+          />
+
+        </label>
+        <br />
+        <label>
+          Review:
+          <textarea 
+            value={review} 
+            onChange={(e) => setReview(e.target.value)} 
+          />
+        </label>
+        <br />
+        
+        <label>
+          Game Status:
+          <select 
+            value={gameStatus} 
+            onChange={(e) => setGameStatus(e.target.value)} 
+          >
+            <option value="currently_playing">Currently Playing</option>
+            <option value="completed">Completed</option>
+            <option value="not_started">Not Started</option>
+          </select>
+        </label>
+        <br />
+        <button onClick={handleUpdate}>Update</button>
+      </div>
     </div>
   );
 };
