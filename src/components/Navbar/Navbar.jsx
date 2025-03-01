@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext"; 
+import { removeToken } from '../../utils/auth';
 import styles from "./navbar.module.css";
 
 export default function Navbar() {
@@ -8,7 +9,7 @@ export default function Navbar() {
   const navigate = useNavigate(); 
 
   const handleLogout = () => {
-    localStorage.removeItem("token"); 
+    removeToken(); 
     setUser(null); 
     navigate("/login"); 
   };
