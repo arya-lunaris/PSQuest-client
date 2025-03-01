@@ -2,10 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getFullUserGame } from "../../services/usergameService"; 
 
-const getToken = () => {
-  return localStorage.getItem("gsky_token");
-};
-
 const FullGamePage = () => {
   const [userGameDetails, setUserGameDetails] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -14,7 +10,7 @@ const FullGamePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = getToken();  
+    const token = localStorage.getItem("gsky_token");
 
     if (!token) {
       console.warn("⚠️ No token found! You will not be able to fetch user game details.");
@@ -25,7 +21,7 @@ const FullGamePage = () => {
 
     const fetchUserGameDetails = async () => {
       try {
-        const gameDetails = await getFullUserGame(usergameId, token);
+        const gameDetails = await getFullUserGame(usergameId);
         setUserGameDetails(gameDetails);
       } catch (error) {
         setError("Failed to fetch game details.");
@@ -47,19 +43,24 @@ const FullGamePage = () => {
 
   if (!userGameDetails) return <p>Game details not found.</p>;
 
-  const { game, gameStatus, rating, review } = userGameDetails;
+  const { game, page_status, game_status, rating, review } = userGameDetails;
+  
+  const displayRating = rating !== null ? rating : "No rating yet";
+  const displayReview = review || "No review yet";
+  const displayGameStatus = game_status || "No game status available";
+
   return (
     <div>
       <h1>{game?.title || "Game Title Unavailable"}</h1>
       <img src={game?.cover || "placeholder.jpg"} alt={game?.title || "No Cover"} />
       <p>{game?.first_release_date || "Release Date unavailable"}</p>
       <p>Rating: {game?.total_rating ? game.total_rating.toFixed(1) : "Rating unavailable"}</p>
-      <p>Genres: {Array.isArray(game?.genres) ? game.genres.join(", ") : "Genres unavailable"}</p>
-      <p>Description: {game?.storyline || "Storyline unavailable"}</p>
+      <p>Genres: {game?.genres?.length ? game.genres.join(", ") : "Genres unavailable"}</p>
+      <p>{game?.storyline || "Storyline unavailable"}</p>
 
-      <p>Status: {gameStatus || "Status unavailable"}</p>
-      <p>Rating: {rating !== null ? rating : "No rating yet"}</p>
-      <p>Review: {review || "No review yet"}</p>
+      <p>Game Status: {displayGameStatus}</p>
+      <p>Rating: {displayRating}</p>
+      <p>Review: {displayReview}</p>
     </div>
   );
 };
