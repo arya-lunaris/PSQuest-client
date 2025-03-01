@@ -44,3 +44,27 @@ export const removeGameFromUser = async (gameId) => {
         throw error;
     }
 };
+
+export const getFullUserGame = async (usergameId) => {
+    const token = getToken();
+  
+    if (!token) {
+      throw new Error("No token found in localStorage");
+    }
+  
+    const response = await fetch(`${BASE_URL}/${usergameId}/full/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  
+    if (!response.ok) {
+      throw new Error("Failed to fetch game details");
+    }
+  
+    const data = await response.json();
+    return data;
+  };
+

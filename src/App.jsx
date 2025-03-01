@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import CollectionPage from "./components/CollectionPage/CollectionPage";
-// import FullGamePage from "./components/FullGamePage/FullGamePage";
+import FullGamePage from "./components/FullGamePage/FullGamePage";
 // import HomePage from "./components/HomePage/HomePage";
 import LoginPage from "./components/LoginPage/LoginPage";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
@@ -16,7 +16,7 @@ function App() {
       <Routes>
         {/* <Route path="/" element={<HomePage />} /> */}
         <Route path="/search" element={<SearchPage />} />
-        {/* <Route path="/game/:gameId" element={<FullGamePage />} /> */}
+        <Route path="/game/:usergameId" element={<FullGamePage />} />
         <Route path="/collection" element={<CollectionPage />} />
         <Route path="/wishlist" element={<WishlistPage />} />
         <Route path="/signup" element={<SignupPage />} />

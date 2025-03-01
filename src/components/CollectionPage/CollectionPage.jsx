@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { getUserGamesByStatus } from "../../services/usergameService";
 import GameCard from "../../components/GameCard/GameCard"; 
 import { removeGameFromUser } from "../../services/usergameService"; 
+import { useNavigate } from 'react-router-dom';  
+
 
 const CollectionPage = () => {
   const [collectionGames, setCollectionGames] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();  
 
   useEffect(() => {
     const fetchCollectionGames = async () => {
@@ -31,6 +34,10 @@ const CollectionPage = () => {
     }
   };
 
+  const handleViewGame = (userGameId) => {
+    navigate(`/game/${userGameId}`);
+  };
+
   return (
     <div>
       <h1>Your Collection</h1>
@@ -46,20 +53,22 @@ const CollectionPage = () => {
                 const game = userGame.game;  
                 const genres = Array.isArray(game.genres) ? game.genres.join(", ") : game.genres || 'Genres unavailable';
                 return (
-                  <GameCard
-                    key={userGame.id} 
-                    game={{
-                      id: game.id,
-                      title: game.title,
-                      image: game.cover || 'placeholder.jpg',
-                      releaseDate: game.first_release_date || 'Release Date unavailable',
-                      rating: game.total_rating ? game.total_rating.toFixed(1) : 'Rating unavailable',
-                      genres: genres,
-                      storyline: game.storyline || 'Storyline unavailable.',
-                    }}
-                    type="collection"
-                    onRemove={() => handleRemoveFromCollection(userGame.id)}
-                  />
+                  <div key={userGame.id}>
+                    <GameCard
+                      game={{
+                        id: game.id,
+                        title: game.title,
+                        image: game.cover || 'placeholder.jpg',
+                        releaseDate: game.first_release_date || 'Release Date unavailable',
+                        rating: game.total_rating ? game.total_rating.toFixed(1) : 'Rating unavailable',
+                        genres: genres,
+                        storyline: game.storyline || 'Storyline unavailable.',
+                      }}
+                      type="collection"
+                      onRemove={() => handleRemoveFromCollection(userGame.id)}
+                    />
+                    <button onClick={() => handleViewGame(userGame.id)}>View Game</button>
+                  </div>
                 );
               })}
             </div>
