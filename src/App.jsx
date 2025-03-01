@@ -8,6 +8,7 @@ import ProfilePage from "./components/ProfilePage/ProfilePage";
 import SearchPage from "./components/SearchPage/SearchPage";
 import SignupPage from "./components/SignupPage/SignupPage";
 import WishlistPage from "./components/WishlistPage/WishlistPage";
+import './index.css'
 
 function App() {
   return (
