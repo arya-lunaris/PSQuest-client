@@ -1,24 +1,32 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { UserContext } from "../../contexts/UserContext";
 import { getFullUserGame, updateUserGame } from "../../services/usergameService";
 
 const FullGamePage = () => {
+  const { user } = useContext(UserContext);
   const { usergameId } = useParams();
   const [userGameDetails, setUserGameDetails] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); 
-  const [rating, setRating] = useState(null);
-  const [review, setReview] = useState(""); 
-  const [gameStatus, setGameStatus] = useState(""); 
+  const [error, setError] = useState(null);
+  const [rating, setRating] = useState("");
+  const [review, setReview] = useState("");
+  const [gameStatus, setGameStatus] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserGameDetails = async () => {
+      if (!user) {
+        navigate("/login");
+        return;
+      }
+
       try {
         const gameDetails = await getFullUserGame(usergameId);
         setUserGameDetails(gameDetails);
-        setRating(gameDetails.rating);
-        setReview(gameDetails.review);
-        setGameStatus(gameDetails.game_status);
+        setRating(gameDetails.rating || "");
+        setReview(gameDetails.review || "");
+        setGameStatus(gameDetails.game_status || "");
       } catch (error) {
         setError("Failed to fetch game details.");
       } finally {
@@ -29,9 +37,14 @@ const FullGamePage = () => {
     if (usergameId) {
       fetchUserGameDetails();
     }
-  }, [usergameId]);
+  }, [usergameId, user, navigate]);
 
   const handleUpdate = async () => {
+    if (!user) {
+      setError("You must be logged in to update game details.");
+      return;
+    }
+
     try {
       const updatedData = { rating, review, game_status: gameStatus };
       await updateUserGame(usergameId, updatedData);
@@ -57,7 +70,6 @@ const FullGamePage = () => {
       <p>Genres: {Array.isArray(game?.genres) && game.genres.length ? game.genres.join(", ") : "Genres unavailable"}</p>
       <p>Description: {game?.storyline || "Storyline unavailable"}</p>
 
-
       <div>
         <label>
           Rating (1-5):
@@ -68,7 +80,6 @@ const FullGamePage = () => {
             value={rating} 
             onChange={(e) => setRating(e.target.value)} 
           />
-
         </label>
         <br />
         <label>

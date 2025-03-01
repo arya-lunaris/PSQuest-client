@@ -46,50 +46,44 @@ export const removeGameFromUser = async (gameId) => {
 };
 
 export const getFullUserGame = async (usergameId) => {
-    const token = getToken();
-  
-    if (!token) {
-      throw new Error("No token found in localStorage");
-    }
-  
-    const response = await fetch(`${BASE_URL}/${usergameId}/full/`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  
-    if (!response.ok) {
-      throw new Error("Failed to fetch game details");
-    }
-  
-    const data = await response.json();
-    return data;
-  };
-
-export const updateUserGame = async (usergameId, updatedData) => {
     const token = localStorage.getItem("gsky_token");
   
     if (!token) {
       throw new Error("No token found in localStorage");
     }
   
-    const response = await fetch(`${BASE_URL}/${usergameId}/`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(updatedData), 
-    });
+    try {
+      const response = await axios.get(`${BASE_URL}/${usergameId}/full/`, {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
   
-    if (!response.ok) {
-      throw new Error("Failed to update game details");
+      return response.data; 
+    } catch (error) {
+      throw new Error("Failed to fetch game details: " + error.message);
+    }
+  };
+
+  export const updateUserGame = async (usergameId, updatedData) => {
+    const token = localStorage.getItem("gsky_token");
+  
+    if (!token) {
+      throw new Error("No token found in localStorage");
     }
   
-    const data = await response.json();
-    return data;
+    try {
+      const response = await axios.put(`${BASE_URL}/${usergameId}/`, updatedData, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+  
+      return response.data;  
+    } catch (error) {
+      throw new Error("Failed to update game details: " + error.message);
+    }
   };
   
   
