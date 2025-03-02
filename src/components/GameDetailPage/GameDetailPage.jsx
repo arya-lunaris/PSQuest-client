@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
-import { getGameById } from "../../services/gameService";
-import { addGameToUserList } from "../../services/usergameService";
 import "./GameDetailPage.css";
 
 const GameDetailPage = () => {

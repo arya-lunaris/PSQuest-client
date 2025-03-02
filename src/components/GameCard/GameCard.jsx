@@ -1,11 +1,11 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import './GameCard.css';
 
 const GameCard = ({ game, userGameId, type, onAddToCollection, onAddToWishlist, onRemove, onMoveToCollection, onViewGame }) => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
-  const imageUrl = game.cover || game.image || "https://via.placeholder.com/150"; 
+  const imageUrl = game.cover || game.image || "https://via.placeholder.com/150";
 
   const handleImageClick = () => {
     if (type === "collection" || type === "wishlist") {
@@ -17,9 +17,10 @@ const GameCard = ({ game, userGameId, type, onAddToCollection, onAddToWishlist, 
 
   return (
     <div className="game-card">
-      <div onClick={handleImageClick} className="game-card-image-container">
+      <div className="game-card-image-container" onClick={handleImageClick}>
         <img src={imageUrl} alt={game.title} className="game-card-image" />
       </div>
+
 
       <h3 className="game-card-title">{game.title}</h3>
 
