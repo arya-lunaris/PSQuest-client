@@ -4,7 +4,7 @@ import { setToken } from '../../utils/auth';
 import { getUserFromToken } from '../../utils/auth';
 import { UserContext } from '../../contexts/UserContext';
 import { signup } from '../../services/userService';
-import styles from './signup.module.css';
+import './SignupPage.css';  
 
 export default function Signup() {
   const { setUser } = useContext(UserContext);
@@ -41,10 +41,10 @@ export default function Signup() {
   };
 
   return (
-    <section className={styles.container}>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <div className={styles['form-group']}>
+    <section className="profile-container">
+      <h1 className="profile-title">Sign Up</h1>
+      <form onSubmit={handleSubmit} className="profile-form">
+        <div className="form-group">
           <label htmlFor="username">Username</label>
           <input
             type="text"
@@ -57,7 +57,7 @@ export default function Signup() {
           {errors.username && <p className="error-message">{errors.username}</p>}
         </div>
         
-        <div className={styles['form-group']}>
+        <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -70,7 +70,7 @@ export default function Signup() {
           {errors.email && <p className="error-message">{errors.email}</p>}
         </div>
 
-        <div className={styles['form-group']}>
+        <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -83,7 +83,7 @@ export default function Signup() {
           {errors.password && <p className="error-message">{errors.password}</p>}
         </div>
 
-        <div className={styles['form-group']}>
+        <div className="form-group">
           <label htmlFor="password_confirmation">Confirm password</label>
           <input
             type="password"
@@ -100,7 +100,7 @@ export default function Signup() {
             )}
         </div>
 
-        <div className={styles['form-group']}>
+        <div className="form-group">
           <label htmlFor="bio">Bio</label>
           <textarea
             name="bio"
@@ -110,18 +110,21 @@ export default function Signup() {
           />
         </div>
 
-        <div className={styles['form-group']}>
+        <div className="form-group">
           <label htmlFor="profile_picture">Profile Picture</label>
+          <label className="profile-picture-label" htmlFor="file-upload">
+            Add Profile Image
+          </label>
           <input
             type="file"
             name="profile_picture"
-            id="profile_picture"
+            id="file-upload"
             onChange={handleChange}
           />
         </div>
 
         <button
-          className={styles.button}
+          className="profile-button"
           disabled={
             formData.password === '' ||
             formData.password !== formData.password_confirmation ||  
