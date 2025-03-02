@@ -23,7 +23,7 @@ export default function Login() {
             const data = await login(formData);
             setToken(data.token);
             setUser(getUserFromToken());
-            navigate('/collection'); 
+            navigate('/'); 
         } catch (error) {
             setErrors(error.response?.data || { general: 'Invalid login credentials' });
         } finally {
@@ -76,6 +76,8 @@ export default function Login() {
                     {loading ? 'Logging in...' : 'Log In'}
                 </button>
             </form>
+
+            
         </section>
     );
 }

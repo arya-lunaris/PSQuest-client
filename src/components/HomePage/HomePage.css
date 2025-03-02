@@ -68,12 +68,33 @@ a {
 .home-image {
     max-width: 65%;
     margin-top: 20px;
+    margin-bottom: -30px;
     transition: max-width 0.3s ease;
 }
 
+nav ul {
+    display: flex; 
+    justify-content: center; 
+    gap: 2rem; 
+    list-style: none;
+    padding: 0;
+  }
+  
+  .navLink {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #000;
+    text-decoration: none;
+    padding: 8px 16px;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+  }
+  
+
 @media (min-width: 1024px) {
     .home-image {
-        max-width: 40%;
+        max-width: 35%;
     }
 
     header h1 {

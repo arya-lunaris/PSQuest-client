@@ -24,13 +24,25 @@ const HomePage = () => {
       {!user ? (
         <section className="text-center mb-8">
           <h2 className="text-2xl text-gray-800">Sign Up Now!</h2>
-          <p className="text-gray-700 mt-2 mb-4">Join PSQuest and start discovering and tracking your PlayStation games today!</p>
-          <Link to="/signup">
-            <button className="btn-thin">Sign Up</button>
-          </Link>
+          <p className="text-gray-700 mt-2 mb-4">Join PSQuest and start tracking your PlayStation games today!</p>
+          <div className="flex justify-center space-x-4">
+            <Link to="/signup">
+              <button className="btn-thin">Sign Up</button>
+            </Link>
+            <Link to="/login">
+              <button className="btn-thin">Login</button>
+            </Link>
+          </div>
         </section>
       ) : (
         <>
+        <section className="text-center mb-8">
+            <h2 className="text-2xl text-gray-800">See What's Out There</h2>
+            <p className="text-gray-700 mt-2 mb-4">Explore the best games on PlayStation!</p>
+            <Link to="/search">
+              <button className="btn-thin">Start Looking</button>
+            </Link>
+          </section>
           <nav className="mb-8 text-center">
             <h2 className="text-2xl text-gray-800">Navigate</h2>
             <ul className="mt-4 space-y-2">
@@ -43,13 +55,7 @@ const HomePage = () => {
             </ul>
           </nav>
 
-          <section className="text-center mb-8">
-            <h2 className="text-2xl text-gray-800">See What's Out There!</h2>
-            <p className="text-gray-700 mt-2 mb-4">Explore the best games on PlayStation. Track your progress and share your thoughts!</p>
-            <Link to="/search">
-              <button className="btn-thin">Start Looking</button>
-            </Link>
-          </section>
+          
         </>
       )}
 

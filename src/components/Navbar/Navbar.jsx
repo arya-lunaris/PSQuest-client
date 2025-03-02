@@ -11,7 +11,7 @@ export default function Navbar() {
   const handleLogout = () => {
     removeToken(); 
     setUser(null); 
-    navigate("/login"); 
+    navigate("/"); 
   };
 
   return (
