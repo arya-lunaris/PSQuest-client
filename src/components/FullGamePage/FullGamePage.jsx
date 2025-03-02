@@ -12,7 +12,7 @@ const FullGamePage = () => {
   const [error, setError] = useState(null);
   const [rating, setRating] = useState("");
   const [review, setReview] = useState("");
-  const [gameStatus, setGameStatus] = useState("");
+  const [pageStatus, setPageStatus] = useState(""); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const FullGamePage = () => {
         setUserGameDetails(gameDetails);
         setRating(gameDetails.rating || "");
         setReview(gameDetails.review || "");
-        setGameStatus(gameDetails.game_status || "");
+        setPageStatus(gameDetails.page_status || "");  
       } catch (error) {
         setError("Failed to fetch game details.");
       } finally {
@@ -47,10 +47,20 @@ const FullGamePage = () => {
     }
 
     try {
-      const updatedData = { rating, review, game_status: gameStatus };
+      const updatedData = { rating, review, page_status: pageStatus };  
       await updateUserGame(usergameId, updatedData);
     } catch (error) {
       setError("Failed to update game details.");
+    }
+  };
+
+  const handleMoveToCollection = async () => {
+    try {
+      const updatedData = { page_status: 'collection' };
+      await updateUserGame(usergameId, updatedData);
+      setPageStatus('collection');
+    } catch (error) {
+      console.error("Failed to move game to collection", error);
     }
   };
 
@@ -77,29 +87,41 @@ const FullGamePage = () => {
       </div>
   
       <div className="full-game-right">
-        <div className="full-game-status">
-          <label>Game Status:</label>
-          <select value={gameStatus} onChange={(e) => setGameStatus(e.target.value)}>
-            <option value="currently_playing">Currently Playing</option>
-            <option value="completed">Completed</option>
-            <option value="not_started">Not Started</option>
-          </select>
-  
-          <label>Rating (1-5):</label>
-          <input type="number" min="1" max="5" value={rating} onChange={(e) => setRating(e.target.value)} />
-  
-          <label>Review:</label>
-          <textarea value={review} onChange={(e) => setReview(e.target.value)} />
-        </div>
-  
-        <div className="full-game-buttons">
-          <button onClick={handleUpdate}>Update</button>
-        </div>
+        {pageStatus !== "wishlist" && (
+          <>
+            <div className="full-game-status">
+              <label>Game Status:</label>
+              <select value={pageStatus} onChange={(e) => setPageStatus(e.target.value)}>
+                <option value="not_started">Not Started</option>
+                <option value="currently_playing">Currently Playing</option>
+                <option value="completed">Completed</option>
+              </select>
+
+              <label>Rating (1-5):</label>
+              <input type="number" min="1" max="5" value={rating} onChange={(e) => setRating(e.target.value)} />
+
+              <label>Review:</label>
+              <textarea value={review} onChange={(e) => setReview(e.target.value)} />
+            </div>
+
+            <div className="full-game-buttons">
+              <button onClick={handleUpdate}>Update</button>
+            </div>
+          </>
+        )}
+
+        {pageStatus === "wishlist" && (
+          <div className="wishlist-info">
+            <p>To rate and review this game, move it to your collection!</p>
+            <button onClick={handleMoveToCollection} className="btn-move-to-collection">
+              Move Game
+            </button>
+          </div>
+        )}
       </div>
   
     </div>
   );
-  
 };
 
 export default FullGamePage;

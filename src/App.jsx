@@ -8,6 +8,7 @@ import ProfilePage from "./components/ProfilePage/ProfilePage";
 import SearchPage from "./components/SearchPage/SearchPage";
 import SignupPage from "./components/SignupPage/SignupPage";
 import WishlistPage from "./components/WishlistPage/WishlistPage";
+import GameDetailPage from "./components/GameDetailPage/GameDetailPage";
 import './index.css'
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile/:userId" element={<ProfilePage />} />
+        <Route path="/game-detail/:gameId" element={<GameDetailPage />} />
       </Routes>
       <footer className="text-center text-gray-600 py-4">
         <p>&copy; 2025 PSQuest. All rights reserved.</p>

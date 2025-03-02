@@ -4,6 +4,7 @@ import { getToken } from "../utils/auth";
 const BASE_URL = 'http://127.0.0.1:8000/game';
 const USER_GAMES_URL = 'http://127.0.0.1:8000/user-games'
 
+
 export const gameIndex = async () => {
   try {
     const res = await axios.get(BASE_URL + "/index", {

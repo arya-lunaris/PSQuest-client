@@ -1,0 +1,106 @@
+.game-card {
+    background-color: white !important;
+    padding: 20px !important;
+    margin: 15px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+    width: 350px !important;
+    height: 500px !important;
+    text-align: center !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.game-card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+.game-card-image {
+    width: 40% !important;
+    height: auto !important;
+    object-fit: cover !important;
+    border-radius: 8px !important;
+    margin: 0 auto !important;
+    display: block !important;
+}
+
+.game-card-title {
+    font-size: 1.25rem !important;
+    font-weight: bold !important;
+    color: #333 !important;
+    margin-top: 10px !important;
+    max-height: 3rem !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    display: block !important;
+}
+
+
+.bold-label {
+    font-weight: bold !important;
+    color: #333 !important;
+}
+
+.game-card-date,
+.game-card-rating,
+.game-card-genres {
+    font-size: 0.875rem !important;
+    color: black !important;
+    margin: 10px 0 !important; 
+}
+
+.game-card-storyline {
+    font-size: 0.875rem !important;
+    color: black !important;
+    height: 80px !important;
+    overflow-y: auto !important;
+    margin-bottom: 20px !important;
+}
+
+.game-card-buttons {
+    display: flex !important;
+    justify-content: space-between !important;
+    margin-top: 15px !important;
+}
+
+.game-card-buttons button {
+    margin: 5px !important;
+    width: 48% !important;
+    background-color: transparent !important;
+    border: 2px solid transparent !important;
+    transition: background-color 0.3s ease, border 0.3s ease !important;
+    cursor: pointer !important;
+}
+
+.game-card-buttons button:hover {
+    background-color: #e0e0e0 !important;
+}
+
+.btn-add:active {
+    border: 2px solid #0070cb !important;
+}
+
+.btn-add,
+.btn-remove {
+    font-family: sans-serif !important; 
+    color: #0070cb !important;
+    font-size: 1rem !important;
+    padding: 4px 16px !important;
+    border-radius: 9999px !important;
+    text-decoration: none !important;
+}
+
+.btn-add:hover,
+.btn-remove:hover {
+    background-color: #e0e0e0 !important;
+}
+
+.btn-remove {
+    color: #e53e3e !important;
+    border: 2px solid #e53e3e !important;
+}
+
+.btn-remove:active {
+    border: 2px solid #e53e3e !important;
+}

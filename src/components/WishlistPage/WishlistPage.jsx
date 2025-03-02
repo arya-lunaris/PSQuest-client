@@ -67,6 +67,7 @@ const WishlistPage = () => {
                     genres: genres,
                     storyline: game.storyline || "Storyline unavailable.",
                   }}
+                  userGameId={userGame.id} 
                   type="wishlist"
                   onRemove={() => handleRemove(userGame.id)}  
                   onMoveToCollection={() => handleMoveToCollection(userGame)}  

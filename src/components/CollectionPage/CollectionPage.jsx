@@ -63,6 +63,7 @@ const CollectionPage = () => {
                     genres: genres,
                     storyline: game.storyline || 'Storyline unavailable.',
                   }}
+                  userGameId={userGame.id} 
                   type="collection"
                   onRemove={() => handleRemoveFromCollection(userGame.id)}
                   onViewGame={() => handleViewGame(userGame.id)}  

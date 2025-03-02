@@ -1,67 +1,41 @@
 .game-card {
     background-color: white !important;
-    padding: 20px !important;
-    margin: 15px !important;
+    padding: 0 !important;
+    margin: 20px !important; 
     border-radius: 8px !important;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
-    width: 350px !important;
-    height: 500px !important;
+    width: 200px !important;
     text-align: center !important;
-    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-}
-
-.game-card:hover {
-    transform: translateY(-5px) !important;
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2) !important;
+    position: relative !important;
+    transition: all 0.3s ease !important;
+    box-shadow: none !important;
 }
 
 .game-card-image {
-    width: 40% !important;
-    height: auto !important;
-    object-fit: cover !important;
+    width: 100% !important;
+    height: 200px !important;
+    background-size: cover !important;
+    background-position: center !important;
     border-radius: 8px !important;
-    margin: 0 auto !important;
-    display: block !important;
+    transition: border 0.3s ease !important;
+    padding: 8px !important;
+    box-sizing: border-box !important;
 }
 
 .game-card-title {
-    font-size: 1.25rem !important;
+    font-size: 1.125rem !important;
     font-weight: bold !important;
     color: #333 !important;
-    margin-top: 10px !important;
-    max-height: 3rem !important;
+    margin: 10px 0 !important;
+    max-height: 2.5rem !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     white-space: nowrap !important;
-    display: block !important;
-}
-
-
-.bold-label {
-    font-weight: bold !important;
-    color: #333 !important;
-}
-
-.game-card-date,
-.game-card-rating,
-.game-card-genres {
-    font-size: 0.875rem !important;
-    color: black !important;
-    margin: 10px 0 !important; 
-}
-
-.game-card-storyline {
-    font-size: 0.875rem !important;
-    color: black !important;
-    height: 80px !important;
-    overflow-y: auto !important;
-    margin-bottom: 20px !important;
 }
 
 .game-card-buttons {
     display: flex !important;
     justify-content: space-between !important;
-    margin-top: 15px !important;
+    margin-top: 8px !important;
 }
 
 .game-card-buttons button {
@@ -73,19 +47,16 @@
     cursor: pointer !important;
 }
 
-.game-card-buttons button:hover {
-    background-color: #e0e0e0 !important;
-}
-
 .btn-add:active {
     border: 2px solid #0070cb !important;
 }
 
 .btn-add,
 .btn-remove {
+    font-family: sans-serif !important; 
     color: #0070cb !important;
-    font-size: 1rem !important;
-    padding: 4px 16px !important;
+    font-size: 0.875rem !important;
+    padding: 4px 12px !important;
     border-radius: 9999px !important;
     text-decoration: none !important;
 }

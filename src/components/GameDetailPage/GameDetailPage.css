@@ -1,4 +1,4 @@
-.full-game-page {
+.game-detail-page {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -10,40 +10,41 @@
     gap: 40px;
 }
 
-.full-game-left {
+.game-detail-left {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.full-game-title {
+.game-detail-title {
     font-size: 2rem !important;
     color: #333;
     text-align: center;
     margin-bottom: 20px;
 }
 
-.full-game-cover {
-    width: 200px !important;
+.game-detail-cover {
+    width: 250px !important;
     height: auto;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
 }
 
-.full-game-details {
+.game-detail-info {
     text-align: left;
     font-size: 1rem !important;
     color: black;
     line-height: 1.6;
+    max-width: 100%;
 }
 
-.full-game-details p {
+.game-detail-info p {
     margin: 10px 0;
 }
 
-.full-game-right {
+.game-detail-right {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -52,66 +53,24 @@
     border-radius: 8px;
 }
 
-.full-game-status {
-    width: 100%;
-    max-width: 400px;
-}
-
-.full-game-status label {
-    font-size: 1rem;
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
-    color: #333;
-}
-
-.full-game-status select,
-.full-game-status input,
-.full-game-status textarea {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    margin-bottom: 10px;
-    background-color: white;
-}
-
-.full-game-buttons button {
-    background-color: #0070cb;
-    color: white;
-    font-size: 1rem;
-    padding: 10px 20px;
-    border-radius: 9999px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.full-game-buttons button:hover {
-    background-color: #005fa3;
-}
-
-.full-game-buttons button:active {
-    background-color: #003f73;
-}
-
-.wishlist-info {
+.add-game-section {
     margin-top: 20px;
+    background-color: #f3f4f6;
     padding: 15px;
     border-radius: 8px;
     width: 100%;
     max-width: 400px;
     text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.wishlist-info p {
+.add-game-section p {
     font-size: 1rem;
     color: #555;
     margin-bottom: 15px;
 }
 
-.wishlist-info .btn-move-to-collection {
+.add-game-section .btn-add-game {
     background-color: #0070cb; 
     color: white;
     border: none;
@@ -120,12 +79,13 @@
     border-radius: 9999px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin: 5px;
 }
 
-.wishlist-info .btn-move-to-collection:hover {
+.add-game-section .btn-add-game:hover {
     background-color: #005fa3;
 }
 
-.wishlist-info .btn-move-to-collection:active {
+.add-game-section .btn-add-game:active {
     background-color: #003f73;
 }
