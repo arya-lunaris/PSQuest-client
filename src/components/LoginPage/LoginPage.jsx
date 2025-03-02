@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { setToken, getUserFromToken } from '../../utils/auth';
 import { UserContext } from '../../contexts/UserContext';
 import { login } from '../../services/userService';
-import styles from './login.module.css';
+import './LoginPage.css';  
 
 export default function Login() {
     const { setUser } = useContext(UserContext);
@@ -37,13 +37,13 @@ export default function Login() {
     };
 
     return (
-        <section className={styles.container}>
-            <h1>Welcome Back</h1>
-            <form onSubmit={handleSubmit}>
-                <div className={styles['form-group']}>
+        <section className="profile-container">
+            <h1 className="profile-title">Welcome Back</h1>
+            <form onSubmit={handleSubmit} className="profile-form">
+                <div className="form-group">
                     <label htmlFor="identifier">Username or Email</label>
                     <input
-                        type="text" 
+                        type="text"
                         name="identifier"
                         id="identifier"
                         placeholder="Enter your username or email"
@@ -53,7 +53,7 @@ export default function Login() {
                     {errors.identifier && <p className="error-message">{errors.identifier}</p>}
                 </div>
 
-                <div className={styles['form-group']}>
+                <div className="form-group">
                     <label htmlFor="password">Password</label>
                     <input
                         type="password"
@@ -69,8 +69,8 @@ export default function Login() {
                 {errors.general && <p className="error-message">{errors.general}</p>}
 
                 <button
-                    className={styles.button}
-                    disabled={formData.identifier === '' || formData.password === '' || loading} 
+                    className="profile-button"
+                    disabled={formData.identifier === '' || formData.password === '' || loading}
                     type="submit"
                 >
                     {loading ? 'Logging in...' : 'Log In'}
@@ -79,4 +79,3 @@ export default function Login() {
         </section>
     );
 }
-
