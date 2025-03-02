@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import { profile, getUserProfile } from "../../services/userService";
-import styles from "./profile.module.css";
+import './ProfilePage.css';
 
 export default function UpdateProfile() {
     const { user, setUser } = useContext(UserContext);
@@ -40,7 +40,6 @@ export default function UpdateProfile() {
         });
     }, [user, userId, navigate]);
 
-
     const handleChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
     };
@@ -72,13 +71,13 @@ export default function UpdateProfile() {
     };
 
     return (
-        <div className={styles.container}>
-            <h1 className={styles.title}>Update Your Profile</h1>
-            {errors.general && <p className={styles.error}>{errors.general}</p>}
-            {errors.message && <p className={styles.error}>{errors.message}</p>}
+        <div className="profile-container">
+            <h1 className="profile-title">Update Your Profile</h1>
+            {errors.general && <p className="error">{errors.general}</p>}
+            {errors.message && <p className="error">{errors.message}</p>}
 
-            <form className={styles.form} onSubmit={handleSubmit}>
-                <div className={styles.formGroup}>
+            <form className="profile-form" onSubmit={handleSubmit}>
+                <div className="form-group">
                     <label>Username:</label>
                     <input
                         type="text"
@@ -89,7 +88,7 @@ export default function UpdateProfile() {
                     />
                 </div>
 
-                <div className={styles.formGroup}>
+                <div className="form-group">
                     <label>Email:</label>
                     <input
                         type="email"
@@ -100,7 +99,7 @@ export default function UpdateProfile() {
                     />
                 </div>
 
-                <div className={styles.formGroup}>
+                <div className="form-group">
                     <label>New Password:</label>
                     <input
                         type="password"
@@ -110,7 +109,7 @@ export default function UpdateProfile() {
                     />
                 </div>
 
-                <div className={styles.formGroup}>
+                <div className="form-group">
                     <label>Confirm Password:</label>
                     <input
                         type="password"
@@ -120,7 +119,7 @@ export default function UpdateProfile() {
                     />
                 </div>
 
-                <div className={styles.formGroup}>
+                <div className="form-group">
                     <label>Bio:</label>
                     <textarea
                         name="bio"
@@ -129,16 +128,20 @@ export default function UpdateProfile() {
                     />
                 </div>
 
-                <div className={styles.formGroup}>
+                <div className="form-group">
                     <label>Profile Picture:</label>
+                    <label className="profile-picture-label" htmlFor="profile_picture">
+                        Choose a Profile Picture
+                    </label>
                     <input
                         type="file"
                         name="profile_picture"
+                        id="profile_picture"
                         onChange={handleChange}
                     />
                 </div>
 
-                <button className={styles.button} type="submit">Update Profile</button>
+                <button className="profile-button" type="submit">Update Profile</button>
             </form>
         </div>
     );
