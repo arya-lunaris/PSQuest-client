@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
-import './HomePage.css'
+import './HomePage.css';
 
 const HomePage = () => {
   const { user } = useContext(UserContext);
@@ -9,8 +9,16 @@ const HomePage = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <header className="text-center mt-12 mb-8">
-        <h1 className="text-3xl text-gray-900">Welcome to PSQuest</h1>
+        <h1 className="text-3xl text-gray-900">PSQuest</h1>
         <p className="text-lg text-gray-600 mt-2">Your journey to discover and track your favourite PlayStation games!</p>
+        
+        <div className="image-container my-8">
+          <img
+            src="https://imgur.com/Thz1Tp7.png"
+            alt="PlayStation Games"
+            className="home-image"
+          />
+        </div>
       </header>
 
       {!user ? (
