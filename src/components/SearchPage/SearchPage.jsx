@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { gameFetchFromIGDB } from "../../services/gameService";  
 import { saveGameFromIGDB } from "../../services/usergameService"; 
 import GameCard from "../../components/GameCard/GameCard";  
-import './SearchPage.css';
+import "./SearchPage.css";
 
 const SearchPage = () => {
     const [searchTerm, setSearchTerm] = useState(""); 
@@ -45,7 +45,7 @@ const SearchPage = () => {
     const handleAddToCollection = async (game) => {
       try {
         const gameWithStatus = { ...game, status: 'collection' };  
-        const savedGame = await saveGameFromIGDB(gameWithStatus); 
+        await saveGameFromIGDB(gameWithStatus); 
       } catch (error) {
         console.error("Failed to add game to collection", error);
       }
@@ -54,7 +54,7 @@ const SearchPage = () => {
     const handleAddToWishlist = async (game) => {
       try {
         const gameWithStatus = { ...game, status: 'wishlist' };  
-        const savedGame = await saveGameFromIGDB(gameWithStatus); 
+        await saveGameFromIGDB(gameWithStatus); 
       } catch (error) {
         console.error("Failed to add game to wishlist", error);
       }
@@ -62,35 +62,42 @@ const SearchPage = () => {
   
     return (
       <div className="searchPage">
-        <h1 className="text-center text-3xl text-gray-900">Search for Games</h1>
-  
-        <form onSubmit={handleSearchSubmit} className="searchForm">
-          <input
-            type="text"
-            placeholder="Search for a game"
-            value={searchTerm}
-            onChange={handleSearchChange}
-            className="searchInput"
+        <div className="image-container">
+          <img 
+            src="https://imgur.com/qZWr1EO.png" 
+            alt="Banner" 
+            className="banner-image"
           />
-          <button type="submit" className="btn-thin">Search</button>
-        </form>
+          <h1 className="title">Search for Games</h1>
+          <form onSubmit={handleSearchSubmit} className="searchForm">
+            <input
+              type="text"
+              placeholder="Search for a game"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              className="searchInput"
+            />
+            <button type="submit" className="btn-thin"><img 
+            src="https://imgur.com/sjDimfB.png" 
+            alt="Search" 
+            className="search-image"
+          /></button>
+          </form>
+        </div>
   
         {error && <p className="error text-center text-red-500">{error}</p>}
         {loading && <p className="text-center">Loading...</p>}
       
-      <div className="gameResults">
-        {searched && games.length === 0 && !loading && <p className="text-center">No results found</p>}
-
-        {!loading && games.length > 0 && games.map((game) => {
-          const imageUrl = game.cover ? game.cover : "https://via.placeholder.com/150";
-          
-          return (
+        <div className="gameResults">
+          {searched && games.length === 0 && !loading && <p className="text-center">No results found</p>}
+  
+          {!loading && games.length > 0 && games.map((game) => (
             <GameCard
               key={game.id ? game.id : `${game.name}-${Math.random()}`}
               game={{
                 id: game.id,
                 title: game.title,
-                image: game.cover || game.image ? game.cover : "placeholder.jpg",
+                image: game.cover || "placeholder.jpg",
                 releaseDate: game.first_release_date || "Release Date unavailable",
                 rating: game.total_rating ? game.total_rating.toFixed(1) : "Rating unavailable",
                 genres: game.genres && game.genres.length > 0 ? game.genres.join(", ") : "Genres unavailable",
@@ -101,11 +108,10 @@ const SearchPage = () => {
               onAddToWishlist={handleAddToWishlist}
               onRemove={() => {}}  
             />
-          );
-        })}
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
 };
 
 export default SearchPage;
