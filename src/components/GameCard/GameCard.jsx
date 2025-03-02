@@ -1,6 +1,7 @@
 import React from "react";
+import './GameCard.css'
 
-const GameCard = ({ game, type, onAddToCollection, onAddToWishlist, onRemove, onMoveToCollection }) => {
+const GameCard = ({ game, type, onAddToCollection, onAddToWishlist, onRemove, onViewGame }) => {
     const imageUrl = game.cover || game.image || "https://via.placeholder.com/150"; 
   
     return (
@@ -25,13 +26,13 @@ const GameCard = ({ game, type, onAddToCollection, onAddToWishlist, onRemove, on
             </>
           ) : type === "collection" ? (
             <>
-              <button className="btn-remove" onClick={() => onRemove(game)}>Remove from Collection</button>
+              <button className="btn-add" onClick={() => onViewGame(game.id)}>View Game</button>
+              <button className="btn-remove red-btn" onClick={() => onRemove(game.id)}>Remove Game</button>
             </>
           ) : null}
         </div>
       </div>
     );
-  };
-  
+};
 
 export default GameCard;

@@ -3,7 +3,7 @@ import { getUserGamesByStatus } from "../../services/usergameService";
 import GameCard from "../../components/GameCard/GameCard"; 
 import { removeGameFromUser } from "../../services/usergameService"; 
 import { useNavigate } from 'react-router-dom';  
-
+import './CollectionPage.css'
 
 const CollectionPage = () => {
   const [collectionGames, setCollectionGames] = useState([]);
@@ -39,39 +39,36 @@ const CollectionPage = () => {
   };
 
   return (
-    <div>
+    <div className="collectionPage">
       <h1>Your Collection</h1>
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div>
+        <div className="gameResults">
           {collectionGames.length === 0 ? (
             <p>No games in your collection.</p>
           ) : (
-            <div>
-              {collectionGames.map((userGame) => {
-                const game = userGame.game;  
-                const genres = Array.isArray(game.genres) ? game.genres.join(", ") : game.genres || 'Genres unavailable';
-                return (
-                  <div key={userGame.id}>
-                    <GameCard
-                      game={{
-                        id: game.id,
-                        title: game.title,
-                        image: game.cover || 'placeholder.jpg',
-                        releaseDate: game.first_release_date || 'Release Date unavailable',
-                        rating: game.total_rating ? game.total_rating.toFixed(1) : 'Rating unavailable',
-                        genres: genres,
-                        storyline: game.storyline || 'Storyline unavailable.',
-                      }}
-                      type="collection"
-                      onRemove={() => handleRemoveFromCollection(userGame.id)}
-                    />
-                    <button onClick={() => handleViewGame(userGame.id)}>View Game</button>
-                  </div>
-                );
-              })}
-            </div>
+            collectionGames.map((userGame) => {
+              const game = userGame.game;  
+              const genres = Array.isArray(game.genres) ? game.genres.join(", ") : game.genres || 'Genres unavailable';
+              return (
+                <GameCard
+                  key={userGame.id}
+                  game={{
+                    id: game.id,
+                    title: game.title,
+                    image: game.cover || 'placeholder.jpg',
+                    releaseDate: game.first_release_date || 'Release Date unavailable',
+                    rating: game.total_rating ? game.total_rating.toFixed(1) : 'Rating unavailable',
+                    genres: genres,
+                    storyline: game.storyline || 'Storyline unavailable.',
+                  }}
+                  type="collection"
+                  onRemove={() => handleRemoveFromCollection(userGame.id)}
+                  onViewGame={() => handleViewGame(userGame.id)}  
+                />
+              );
+            })
           )}
         </div>
       )}

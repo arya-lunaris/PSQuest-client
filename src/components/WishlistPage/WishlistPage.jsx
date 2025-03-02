@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getUserGamesByStatus, removeGameFromUser, saveGameFromIGDB } from "../../services/usergameService"; 
 import GameCard from "../../components/GameCard/GameCard"; 
+import './WishlistPage.css'
 
 const WishlistPage = () => {
   const [wishlistGames, setWishlistGames] = useState([]);
@@ -42,38 +43,36 @@ const WishlistPage = () => {
   };
 
   return (
-    <div>
+    <div className="wishlistPage">
       <h1>Your Wishlist</h1>
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div>
+        <div className="gameResults">
           {wishlistGames.length === 0 ? (
             <p>No games in your wishlist.</p>
           ) : (
-            <div>
-              {wishlistGames.map((userGame) => {
-                const game = userGame.game;  
-                const genres = Array.isArray(game.genres) ? game.genres.join(", ") : game.genres || "Genres unavailable";
-                return (
-                  <GameCard
-                    key={userGame.id} 
-                    game={{
-                      id: game.id,
-                      title: game.title,
-                      image: game.cover || "placeholder.jpg",
-                      releaseDate: game.first_release_date || "Release Date unavailable",
-                      rating: game.total_rating ? game.total_rating.toFixed(1) : "Rating unavailable",
-                      genres: genres,
-                      storyline: game.storyline || "Storyline unavailable.",
-                    }}
-                    type="wishlist"
-                    onRemove={() => handleRemove(userGame.id)}  
-                    onMoveToCollection={() => handleMoveToCollection(userGame)}  
-                  />
-                );
-              })}
-            </div>
+            wishlistGames.map((userGame) => {
+              const game = userGame.game;  
+              const genres = Array.isArray(game.genres) ? game.genres.join(", ") : game.genres || "Genres unavailable";
+              return (
+                <GameCard
+                  key={userGame.id} 
+                  game={{
+                    id: game.id,
+                    title: game.title,
+                    image: game.cover || "placeholder.jpg",
+                    releaseDate: game.first_release_date || "Release Date unavailable",
+                    rating: game.total_rating ? game.total_rating.toFixed(1) : "Rating unavailable",
+                    genres: genres,
+                    storyline: game.storyline || "Storyline unavailable.",
+                  }}
+                  type="wishlist"
+                  onRemove={() => handleRemove(userGame.id)}  
+                  onMoveToCollection={() => handleMoveToCollection(userGame)}  
+                />
+              );
+            })
           )}
         </div>
       )}
