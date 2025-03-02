@@ -16,6 +16,16 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
+      <div className="logo-container">
+        <Link to="/">
+          <img 
+            src="https://imgur.com/UdEzPhk.png" 
+            alt="PSQuest Logo" 
+            className="logo"
+          />
+        </Link>
+      </div>
+      
       <ul className="navLinks">
         <li>
           <Link to="/" className="navLink">Home</Link>

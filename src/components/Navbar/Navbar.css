@@ -12,6 +12,15 @@
     padding: 16px 24px; 
 }
 
+.logo-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.logo {
+    height: 30px; 
+}
+
 .navLinks {
     display: flex;
     justify-content: space-evenly;
