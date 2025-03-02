@@ -40,7 +40,7 @@ const CollectionPage = () => {
 
   return (
     <div className="collectionPage">
-      <h1>Your Collection</h1>
+      <h1 className="collection-title">Your Collection</h1>
       {loading ? (
         <p>Loading...</p>
       ) : (

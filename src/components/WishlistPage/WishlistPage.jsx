@@ -44,7 +44,7 @@ const WishlistPage = () => {
 
   return (
     <div className="wishlistPage">
-      <h1>Your Wishlist</h1>
+      <h1 className="wishlist-title">Your Wishlist</h1>
       {loading ? (
         <p>Loading...</p>
       ) : (
