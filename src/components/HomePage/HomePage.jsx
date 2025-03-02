@@ -54,14 +54,8 @@ const HomePage = () => {
               </li>
             </ul>
           </nav>
-
-          
         </>
       )}
-
-      <footer className="mt-auto text-center text-gray-600 py-4">
-        <p>&copy; 2025 PSQuest. All rights reserved.</p>
-      </footer>
     </div>
   );
 };

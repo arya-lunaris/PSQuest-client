@@ -12,7 +12,7 @@ import './index.css'
 
 function App() {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -24,7 +24,10 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile/:userId" element={<ProfilePage />} />
       </Routes>
-    </>
+      <footer className="text-center text-gray-600 py-4">
+        <p>&copy; 2025 PSQuest. All rights reserved.</p>
+      </footer>
+    </div>
   );
 }
 
