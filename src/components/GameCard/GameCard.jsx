@@ -8,10 +8,10 @@ const GameCard = ({ game, type, onAddToCollection, onAddToWishlist, onRemove, on
       <div className="game-card">
         {imageUrl && <img src={imageUrl} alt={game.title} className="game-card-image" />}
         <h3 className="game-card-title">{game.title}</h3>
-        <p className="game-card-date">Release Date: {game.releaseDate}</p>
-        <p className="game-card-rating">Rating: {game.rating}</p>
-        <p className="game-card-genres">Genres: {game.genres}</p>
-        <p className="game-card-storyline">Description: {game.storyline}</p>
+        <p className="game-card-date"><span className="bold-label">Release Date:</span> {game.releaseDate}</p>
+        <p className="game-card-rating"><span className="bold-label">Rating:</span> {game.rating}</p>
+        <p className="game-card-genres"><span className="bold-label">Genres:</span> {game.genres}</p>
+        <p className="game-card-storyline"><span className="bold-label">Description:</span> {game.storyline}</p>
         
         <div className="game-card-buttons">
           {type === "search" ? (
