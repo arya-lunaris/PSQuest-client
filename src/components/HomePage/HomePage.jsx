@@ -11,7 +11,7 @@ const HomePage = () => {
       <header className="text-center mt-12 mb-8">
         <h1 className="text-3xl text-gray-900">PSQuest</h1>
         <p className="text-lg text-gray-600 mt-2">Your journey to discover and track your favourite PlayStation games!</p>
-        
+
         <div className="image-container my-8">
           <img
             src="https://imgur.com/Thz1Tp7.png"
@@ -36,15 +36,27 @@ const HomePage = () => {
         </section>
       ) : (
         <>
-        <section className="text-center mb-8">
+          <section className="text-center mb-8">
             <h2 className="text-2xl text-gray-800">See What's Out There</h2>
             <p className="text-gray-700 mt-2 mb-4">Explore the best games on PlayStation!</p>
+            <img
+              src="https://imgur.com/JY5az6D.png"
+              alt="PlayStation Games"
+              className="games-image"
+            />
             <Link to="/search">
               <button className="btn-thin">Start Looking</button>
             </Link>
+
           </section>
           <nav className="mb-8 text-center">
             <h2 className="text-2xl text-gray-800">Navigate</h2>
+            <p className="text-gray-700 mt-2 mb-4">See your collection and update your profile!</p>
+            <img
+              src="https://imgur.com/A1d7QD0.png"
+              alt="PlayStation Games"
+              className="collection-image"
+            />
             <ul className="mt-4 space-y-2">
               <li>
                 <Link to="/collection" className="btn-thin">Your Games</Link>
