@@ -1,7 +1,7 @@
 import React from "react";
 import './GameCard.css'
 
-const GameCard = ({ game, type, onAddToCollection, onAddToWishlist, onRemove, onViewGame }) => {
+const GameCard = ({ game, type, onAddToCollection, onAddToWishlist, onRemove, onMoveToCollection, onViewGame }) => {
     const imageUrl = game.cover || game.image || "https://via.placeholder.com/150"; 
   
     return (
