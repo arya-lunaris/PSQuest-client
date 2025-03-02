@@ -19,7 +19,7 @@ export default function Navbar() {
       <div className="logo-container">
         <Link to="/">
           <img 
-            src="https://imgur.com/UdEzPhk.png" 
+            src="https://imgur.com/70qb3aU.png" 
             alt="PSQuest Logo" 
             className="logo"
           />
