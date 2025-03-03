@@ -1,26 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { getUserGamesByStatus, removeGameFromUser, saveGameFromIGDB } from "../../services/usergameService"; 
 import GameCard from "../../components/GameCard/GameCard"; 
-import './WishlistPage.css'
+import { useNavigate, Link } from "react-router-dom";
+import { UserContext } from "../../contexts/UserContext";
+import './WishlistPage.css';
 
 const WishlistPage = () => {
+  const { user } = useContext(UserContext);
   const [wishlistGames, setWishlistGames] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!user) return;
+
     const fetchWishlistGames = async () => {
       try {
         const games = await getUserGamesByStatus("wishlist");
         setWishlistGames(games);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching wishlist games", error);
+      } finally {
         setLoading(false);
       }
     };
 
     fetchWishlistGames();
-  }, []);
+  }, [user]);
 
   const handleRemove = async (userGameId) => {
     try {
@@ -34,8 +39,7 @@ const WishlistPage = () => {
   const handleMoveToCollection = async (userGame) => {
     try {
       const updatedGame = { ...userGame.game, status: 'collection' }; 
-
-      const savedGame = await saveGameFromIGDB(updatedGame); 
+      await saveGameFromIGDB(updatedGame); 
       setWishlistGames((prevGames) => prevGames.filter((g) => g.id !== userGame.id));  
     } catch (error) {
       console.error("Error moving game to collection", error);
@@ -45,7 +49,15 @@ const WishlistPage = () => {
   return (
     <div className="wishlistPage">
       <h1 className="wishlist-title">Your Wishlist</h1>
-      {loading ? (
+
+      {!user ? (
+        <div className="wishlist-login-message">
+          <p>Log in to see your wishlist!</p>
+          <Link to="/login">
+            <button className="btn-thin">Login</button>
+          </Link>
+        </div>
+      ) : loading ? (
         <p>Loading...</p>
       ) : (
         <div className="gameResults">

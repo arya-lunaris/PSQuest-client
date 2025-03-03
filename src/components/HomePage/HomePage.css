@@ -83,17 +83,6 @@ nav ul {
     align-items: center;
 }
 
-
-@media (min-width: 1024px) {
-    .home-image {
-        max-width: 40%;
-    }
-
-    header h1 {
-        font-size: 3rem !important;
-    }
-}
-
 .games-image {
     display: block;
     margin: 20px auto;
@@ -116,4 +105,14 @@ nav ul {
 
 .text-center.mb-8 {
     margin-bottom: 5rem;
+}
+
+@media (min-width: 1024px) {
+    .home-image {
+        max-width: 40%;
+    }
+
+    header h1 {
+        font-size: 3rem !important;
+    }
 }

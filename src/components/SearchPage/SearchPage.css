@@ -145,17 +145,17 @@
   width: 20px;
 }
 
-.login-message {
+.search-login-message {
   text-align: center;
   margin-top: 30px;
 }
 
-.login-message p {
+.search-login-message p {
   font-size: 1.25rem;
   color: #333;
   margin-bottom: 10px;
 }
 
-.login-message .btn-thin {
+.search-login-message .btn-thin {
   margin-top: 10px;
 }

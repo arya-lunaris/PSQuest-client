@@ -1,29 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { getUserGamesByStatus } from "../../services/usergameService";
+import React, { useEffect, useState, useContext } from "react";
+import { getUserGamesByStatus, removeGameFromUser } from "../../services/usergameService";
 import GameCard from "../../components/GameCard/GameCard"; 
-import { removeGameFromUser } from "../../services/usergameService"; 
-import { useNavigate } from 'react-router-dom';  
-import './CollectionPage.css'
+import { useNavigate, Link } from "react-router-dom";  
+import { UserContext } from "../../contexts/UserContext";
+import './CollectionPage.css';
 
 const CollectionPage = () => {
+  const { user } = useContext(UserContext);
   const [collectionGames, setCollectionGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();  
 
   useEffect(() => {
+    if (!user) return;  
+
     const fetchCollectionGames = async () => {
       try {
         const games = await getUserGamesByStatus('collection');
         setCollectionGames(games);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching collection games", error);
+      } finally {
         setLoading(false);
       }
     };
 
     fetchCollectionGames();
-  }, []);
+  }, [user]);
 
   const handleRemoveFromCollection = async (userGameId) => {
     try {
@@ -41,7 +44,15 @@ const CollectionPage = () => {
   return (
     <div className="collectionPage">
       <h1 className="collection-title">Your Collection</h1>
-      {loading ? (
+
+      {!user ? (
+        <div className="collection-login-message">
+          <p>Log in see your collection!</p>
+          <Link to="/login">
+            <button className="btn-thin">Login</button>
+          </Link>
+        </div>
+      ) : loading ? (
         <p>Loading...</p>
       ) : (
         <div className="gameResults">

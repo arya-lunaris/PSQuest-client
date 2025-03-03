@@ -76,7 +76,7 @@ const SearchPage = () => {
           <h1 className="title">Search for Games</h1>
         </div>
   
-        <div className="login-message">
+        <div className="search-login-message">
           <p>You must be logged in to search for games!</p>
           <Link to="/login">
             <button className="btn-thin">Go to Login</button>

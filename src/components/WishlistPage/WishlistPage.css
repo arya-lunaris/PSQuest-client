@@ -25,3 +25,14 @@
     justify-content: center;
     width: 100%;
 }
+
+.wishlist-login-message {
+    text-align: center;
+    margin-top: 175px !important;
+}
+
+.wishlist-login-message p {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
