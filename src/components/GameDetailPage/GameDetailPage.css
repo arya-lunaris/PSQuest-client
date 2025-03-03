@@ -99,3 +99,37 @@
 .btn-move-to-wishlist {
   margin-right: 10px; 
 }
+
+.scrollable-description {
+    max-height: 250px; 
+    overflow-y: auto;  
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-left: -10px; 
+  }
+  
+  .scrollable-description p {
+    font-size: 1rem;
+    color: black;
+    line-height: 1.6;
+    margin: 0;
+  }
+  
+  .wishlist-collection-info {
+    margin-top: 200px;
+    padding: 15px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.wishlist-collection-info p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+
+

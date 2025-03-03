@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
-import { getFullUserGame, updateUserGame, removeGameFromUser } from "../../services/usergameService"; 
+import { getFullUserGame, updateUserGame, removeGameFromUser } from "../../services/usergameService";
 import './FullGamePage.css';
 
 const FullGamePage = () => {
@@ -12,7 +12,7 @@ const FullGamePage = () => {
   const [error, setError] = useState(null);
   const [rating, setRating] = useState("");
   const [review, setReview] = useState("");
-  const [pageStatus, setPageStatus] = useState(""); 
+  const [pageStatus, setPageStatus] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const FullGamePage = () => {
         setUserGameDetails(gameDetails);
         setRating(gameDetails.rating || "");
         setReview(gameDetails.review || "");
-        setPageStatus(gameDetails.page_status || "");  
+        setPageStatus(gameDetails.page_status || "");
       } catch (error) {
         setError("Failed to fetch game details.");
       } finally {
@@ -47,7 +47,7 @@ const FullGamePage = () => {
     }
 
     try {
-      const updatedData = { rating, review, page_status: pageStatus };  
+      const updatedData = { rating, review, page_status: pageStatus };
       await updateUserGame(usergameId, updatedData);
     } catch (error) {
       setError("Failed to update game details.");
@@ -72,7 +72,7 @@ const FullGamePage = () => {
 
     try {
       await removeGameFromUser(usergameId);
-      navigate(-1); 
+      navigate(-1);
     } catch (error) {
       setError("Failed to delete game.");
     }
@@ -95,14 +95,17 @@ const FullGamePage = () => {
           <p><strong>Release Date:</strong> {game?.first_release_date || "Unavailable"}</p>
           <p><strong>Rating:</strong> {game?.total_rating ? game.total_rating.toFixed(1) : "Unavailable"}</p>
           <p><strong>Genres:</strong> {Array.isArray(game?.genres) && game.genres.length ? game.genres.join(", ") : "Unavailable"}</p>
-          
-          <div className="scrollable-description">
+
+          {/* Description Section with Scroll Box */}
+          <div className="description-wrapper">
             <strong>Description:</strong>
-            <p>{game?.storyline || "Unavailable"}</p>
+            <div className="scrollable-description">
+              <p>{game?.storyline || "Unavailable"}</p>
+            </div>
           </div>
         </div>
       </div>
-  
+
       <div className="full-game-right">
         {pageStatus !== "wishlist" && (
           <>
@@ -143,7 +146,8 @@ const FullGamePage = () => {
         </button>
       </div>
     </div>
-  );
+  )
 };
+
 
 export default FullGamePage;
