@@ -17,7 +17,7 @@
     overflow: hidden !important;
     cursor: pointer !important;
     position: relative !important;
-    padding: 2px; 
+    padding: 2px;
 }
 
 .game-card-image {
@@ -26,16 +26,21 @@
     object-fit: cover !important;
     border-radius: 8px !important;
     display: block !important;
-    transition: border 0.3s ease !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important; 
 }
 
-.game-card-image-container:hover {
-    border: 2px solid #0070cb !important; 
-    border-radius: 10px !important;
+.game-card:hover .game-card-image-container {
+    transform: scale(1.0) !important; 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important; 
+}
+
+.game-card:hover .game-card-image {
+    transform: scale(1.03) !important; 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important; 
 }
 
 .game-card-title {
-    font-size: 1.125rem !important;
+    font-size: 1rem !important; 
     font-weight: lighter !important;
     color: black !important;
     margin: 10px 0 !important;
@@ -48,7 +53,7 @@
 .game-card-buttons {
     display: flex !important;
     justify-content: space-between !important;
-    margin-top: -10px !important; 
+    margin-top: -10px !important;
 }
 
 .game-card-buttons button {

@@ -67,7 +67,7 @@
     align-items: center;
     padding: 20px;
     border-radius: 8px;
-    /* margin-top: 125px; */
+    margin-top: 180px; /* remove if wanting to add achievments */
 }
 
 .full-game-status {
@@ -115,7 +115,7 @@
 }
 
 .wishlist-info {
-    margin-top: 200px;
+    margin-top: 125px;
     padding: 15px;
     border-radius: 8px;
     width: 100%;
@@ -150,7 +150,7 @@
 
 .delete-game-button-container {
     position: absolute !important;
-    bottom: 70px !important;
+    bottom: 45px !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     width: 100% !important;
