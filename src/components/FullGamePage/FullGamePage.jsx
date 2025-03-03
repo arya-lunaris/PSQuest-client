@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
-import { getFullUserGame, updateUserGame } from "../../services/usergameService";
+import { getFullUserGame, updateUserGame, removeGameFromUser } from "../../services/usergameService"; 
 import './FullGamePage.css';
 
 const FullGamePage = () => {
@@ -64,6 +64,20 @@ const FullGamePage = () => {
     }
   };
 
+  const handleRemoveGame = async () => {
+    if (!user) {
+      setError("You must be logged in to delete this game.");
+      return;
+    }
+
+    try {
+      await removeGameFromUser(usergameId);
+      navigate(-1); 
+    } catch (error) {
+      setError("Failed to delete game.");
+    }
+  };
+
   if (loading) return <p>Loading...</p>;
 
   if (error) return <p>{error}</p>;
@@ -74,7 +88,6 @@ const FullGamePage = () => {
 
   return (
     <div className="full-game-page">
-      
       <div className="full-game-left">
         <h1 className="full-game-title">{game?.title || "Game Title Unavailable"}</h1>
         <img className="full-game-cover" src={game?.cover || "placeholder.jpg"} alt={game?.title || "No Cover"} />
@@ -82,7 +95,11 @@ const FullGamePage = () => {
           <p><strong>Release Date:</strong> {game?.first_release_date || "Unavailable"}</p>
           <p><strong>Rating:</strong> {game?.total_rating ? game.total_rating.toFixed(1) : "Unavailable"}</p>
           <p><strong>Genres:</strong> {Array.isArray(game?.genres) && game.genres.length ? game.genres.join(", ") : "Unavailable"}</p>
-          <p><strong>Description:</strong> {game?.storyline || "Unavailable"}</p>
+          
+          <div className="scrollable-description">
+            <strong>Description:</strong>
+            <p>{game?.storyline || "Unavailable"}</p>
+          </div>
         </div>
       </div>
   
@@ -119,7 +136,12 @@ const FullGamePage = () => {
           </div>
         )}
       </div>
-  
+
+      <div className="delete-game-button-container">
+        <button onClick={handleRemoveGame} className="btn-remove red-btn">
+          Remove Game
+        </button>
+      </div>
     </div>
   );
 };

@@ -16,6 +16,8 @@
     border-radius: 8px !important;
     overflow: hidden !important;
     cursor: pointer !important;
+    position: relative !important;
+    padding: 2px; 
 }
 
 .game-card-image {
@@ -24,12 +26,18 @@
     object-fit: cover !important;
     border-radius: 8px !important;
     display: block !important;
+    transition: border 0.3s ease !important;
+}
+
+.game-card-image-container:hover {
+    border: 2px solid #0070cb !important; 
+    border-radius: 10px !important;
 }
 
 .game-card-title {
     font-size: 1.125rem !important;
-    font-weight: bold !important;
-    color: #333 !important;
+    font-weight: lighter !important;
+    color: black !important;
     margin: 10px 0 !important;
     max-height: 2.5rem !important;
     overflow: hidden !important;
