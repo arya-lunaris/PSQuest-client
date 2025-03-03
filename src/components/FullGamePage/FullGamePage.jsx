@@ -96,7 +96,6 @@ const FullGamePage = () => {
           <p><strong>Rating:</strong> {game?.total_rating ? game.total_rating.toFixed(1) : "Unavailable"}</p>
           <p><strong>Genres:</strong> {Array.isArray(game?.genres) && game.genres.length ? game.genres.join(", ") : "Unavailable"}</p>
 
-          {/* Description Section with Scroll Box */}
           <div className="description-wrapper">
             <strong>Description:</strong>
             <div className="scrollable-description">

@@ -46,9 +46,17 @@ const GameDetailPage = () => {
         fetchGameDetails();
     }, [gameId, user, navigate, gameFromState]);
 
+    const formatDate = (date) => {
+        return new Date(date).toISOString().split('T')[0];
+    };
+
     const handleAddToWishlist = async () => {
         try {
-            await saveGameFromIGDB({ ...gameDetails, status: "wishlist" });
+            const formattedGameDetails = {
+                ...gameDetails,
+                releaseDate: formatDate(gameDetails.releaseDate)
+            };
+            await saveGameFromIGDB({ ...formattedGameDetails, status: "wishlist" });
         } catch (error) {
             console.error("Failed to add game to wishlist", error);
         }
@@ -56,7 +64,11 @@ const GameDetailPage = () => {
 
     const handleAddToCollection = async () => {
         try {
-            await saveGameFromIGDB({ ...gameDetails, status: "collection" });
+            const formattedGameDetails = {
+                ...gameDetails,
+                releaseDate: formatDate(gameDetails.releaseDate)
+            };
+            await saveGameFromIGDB({ ...formattedGameDetails, status: "collection" });
         } catch (error) {
             console.error("Failed to add game to collection", error);
         }
@@ -94,7 +106,6 @@ const GameDetailPage = () => {
                             {gameDetails.storyline || "Unavailable"}
                         </div>
                     </p>
-
                 </div>
             </div>
 

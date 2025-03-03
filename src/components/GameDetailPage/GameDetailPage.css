@@ -90,16 +90,6 @@
     background-color: #003f73;
 }
 
-.btn-move-to-wishlist,
-.btn-move-to-collection {
-  margin-bottom: 10px; 
-  cursor: pointer;
-}
-
-.btn-move-to-wishlist {
-  margin-right: 10px; 
-}
-
 .scrollable-description {
     max-height: 250px; 
     overflow-y: auto;  
@@ -131,5 +121,14 @@
     margin-bottom: 15px;
 }
 
-
+.btn-move-to-wishlist {
+    margin-bottom: 10px; 
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .btn-move-to-collection {
+    margin-bottom: 10px; 
+    cursor: pointer;
+  }
 

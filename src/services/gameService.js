@@ -92,19 +92,3 @@ export const gameFetchFromIGDB = async (searchTerm) => {
   }
 };
 
-
-export const saveGameFromIGDB = async (gameData) => {
-  try {
-    const res = await axios.post(`${USER_GAMES_URL}/save-game/`, gameData, {
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
-    });
-    return res.data;
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-};
-
-
