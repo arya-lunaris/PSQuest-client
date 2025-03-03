@@ -59,7 +59,7 @@ a {
 
 .home-image {
     max-width: 65%;
-    margin-top: 20px;
+    margin-top: 40px;
     margin-bottom: -10px;
     transition: max-width 0.3s ease;
 }
@@ -86,7 +86,7 @@ nav ul {
 
 @media (min-width: 1024px) {
     .home-image {
-        max-width: 35%;
+        max-width: 40%;
     }
 
     header h1 {
