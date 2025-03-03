@@ -89,3 +89,13 @@
 .add-game-section .btn-add-game:active {
     background-color: #003f73;
 }
+
+.btn-move-to-wishlist,
+.btn-move-to-collection {
+  margin-bottom: 10px; 
+  cursor: pointer;
+}
+
+.btn-move-to-wishlist {
+  margin-right: 10px; 
+}

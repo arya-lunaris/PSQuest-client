@@ -11,7 +11,7 @@ const GameCard = ({ game, userGameId, type, onAddToCollection, onAddToWishlist, 
     if (type === "collection" || type === "wishlist") {
       navigate(`/game/${userGameId}`);
     } else {
-      navigate(`/game-detail/${game.id}`);
+      navigate(`/game-detail/${game.id}`, { state: { game } }); 
     }
   };
 
@@ -27,19 +27,19 @@ const GameCard = ({ game, userGameId, type, onAddToCollection, onAddToWishlist, 
       <div className="game-card-buttons">
         {type === "search" ? (
           <>
-            <button className="btn-add" onClick={() => onAddToCollection(game)}>Add to Collection</button>
+            {/* <button className="btn-add" onClick={() => onAddToCollection(game)}>Add to Collection</button>
             <button className="btn-add" onClick={() => onAddToWishlist(game)}>Add to Wishlist</button>
           </>
-        // ) : type === "wishlist" ? (
-        //   <>
-        //     <button className="btn-add" onClick={() => onMoveToCollection(game)}>Move to Collection</button>
-        //     <button className="btn-remove" onClick={() => onRemove(game)}>Remove</button>
-        //   </>
-        // ) : type === "collection" ? (
-        //   <>
-        //     <button className="btn-add" onClick={() => onViewGame(game.id)}>View Game</button>
-        //     <button className="btn-remove red-btn" onClick={() => onRemove(game.id)}>Remove Game</button>
-        //   </>
+        ) : type === "wishlist" ? (
+          <>
+            <button className="btn-add" onClick={() => onMoveToCollection(game)}>Move to Collection</button>
+            <button className="btn-remove" onClick={() => onRemove(game)}>Remove</button>
+          </>
+        ) : type === "collection" ? (
+          <>
+            <button className="btn-add" onClick={() => onViewGame(game.id)}>View Game</button>
+            <button className="btn-remove red-btn" onClick={() => onRemove(game.id)}>Remove Game</button> */}
+          </>
         ) : null}
       </div>
     </div>
