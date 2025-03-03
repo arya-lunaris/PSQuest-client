@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import { getFullUserGame, updateUserGame, removeGameFromUser } from "../../services/usergameService";
+import Modal from "../../components//Modal/Modal";
 import './FullGamePage.css';
 
 const FullGamePage = () => {
@@ -13,6 +14,8 @@ const FullGamePage = () => {
   const [rating, setRating] = useState("");
   const [review, setReview] = useState("");
   const [pageStatus, setPageStatus] = useState("");
+  const [isMoveModalOpen, setIsMoveModalOpen] = useState(false);
+  const [isRemoveModalOpen, setIsRemoveModalOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -59,6 +62,7 @@ const FullGamePage = () => {
       const updatedData = { page_status: 'collection' };
       await updateUserGame(usergameId, updatedData);
       setPageStatus('collection');
+      setIsMoveModalOpen(true);
     } catch (error) {
       console.error("Failed to move game to collection", error);
     }
@@ -72,7 +76,8 @@ const FullGamePage = () => {
 
     try {
       await removeGameFromUser(usergameId);
-      navigate(-1);
+      setIsRemoveModalOpen(true);
+      setTimeout(() => navigate(-1), 1000);
     } catch (error) {
       setError("Failed to delete game.");
     }
@@ -144,9 +149,20 @@ const FullGamePage = () => {
           Remove Game
         </button>
       </div>
-    </div>
-  )
-};
 
+      <Modal
+        isOpen={isMoveModalOpen}
+        onClose={() => setIsMoveModalOpen(false)}
+        message="Game moved to collection!"
+      />
+
+      <Modal
+        isOpen={isRemoveModalOpen}
+        onClose={() => setIsRemoveModalOpen(false)}
+        message="Removing game..."
+      />
+    </div>
+  );
+};
 
 export default FullGamePage;

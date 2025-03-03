@@ -4,6 +4,7 @@ import { UserContext } from "../../contexts/UserContext";
 import { gameFetchFromIGDB } from "../../services/gameService";  
 import { saveGameFromIGDB } from "../../services/usergameService"; 
 import GameCard from "../../components/GameCard/GameCard";  
+import Modal from "../../components/Modal/Modal";  
 import "./SearchPage.css";
 
 const SearchPage = () => {
@@ -15,6 +16,9 @@ const SearchPage = () => {
   const [error, setError] = useState(""); 
   const [searched, setSearched] = useState(false); 
   
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value); 
   };
@@ -49,7 +53,15 @@ const SearchPage = () => {
   const handleAddToCollection = async (game) => {
     try {
       const gameWithStatus = { ...game, status: 'collection' };  
-      await saveGameFromIGDB(gameWithStatus); 
+      const response = await saveGameFromIGDB(gameWithStatus); 
+      
+      if (response?.message.includes("already")) {
+        setModalMessage("Game is already in your collection!");
+      } else {
+        setModalMessage("Game added to collection!");
+      }
+      setIsModalOpen(true);
+      
     } catch (error) {
       console.error("Failed to add game to collection", error);
     }
@@ -58,7 +70,15 @@ const SearchPage = () => {
   const handleAddToWishlist = async (game) => {
     try {
       const gameWithStatus = { ...game, status: 'wishlist' };  
-      await saveGameFromIGDB(gameWithStatus); 
+      const response = await saveGameFromIGDB(gameWithStatus); 
+      
+      if (response?.message.includes("already")) {
+        setModalMessage("Game is already in your wishlist!");
+      } else {
+        setModalMessage("Game added to wishlist!");
+      }
+      setIsModalOpen(true);
+      
     } catch (error) {
       console.error("Failed to add game to wishlist", error);
     }
@@ -138,6 +158,8 @@ const SearchPage = () => {
           />
         ))}
       </div>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} message={modalMessage} />
     </div>
   );
 };
