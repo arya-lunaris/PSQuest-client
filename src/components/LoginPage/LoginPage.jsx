@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { setToken, getUserFromToken } from '../../utils/auth';
 import { UserContext } from '../../contexts/UserContext';
 import { login } from '../../services/userService';
-import './LoginPage.css';  
+import './LoginPage.css';
 
 export default function Login() {
     const { setUser } = useContext(UserContext);
@@ -23,7 +23,7 @@ export default function Login() {
             const data = await login(formData);
             setToken(data.token);
             setUser(getUserFromToken());
-            navigate('/'); 
+            navigate('/');
         } catch (error) {
             setErrors(error.response?.data || { general: 'Invalid login credentials' });
         } finally {
@@ -77,7 +77,9 @@ export default function Login() {
                 </button>
             </form>
 
-            
+            <div className="signup-link-section">
+                <p><a href="/signup" className="signup-link">Don't have an account? Sign Up</a></p>
+            </div>
         </section>
     );
 }

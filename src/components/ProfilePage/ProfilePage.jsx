@@ -128,19 +128,6 @@ export default function UpdateProfile() {
                     />
                 </div>
 
-                <div className="form-group">
-                    <label>Profile Picture:</label>
-                    <label className="profile-picture-label" htmlFor="profile_picture">
-                        Choose a Profile Picture
-                    </label>
-                    <input
-                        type="file"
-                        name="profile_picture"
-                        id="profile_picture"
-                        onChange={handleChange}
-                    />
-                </div>
-
                 <button className="profile-button" type="submit">Update Profile</button>
             </form>
         </div>

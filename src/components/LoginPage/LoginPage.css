@@ -1,98 +1,18 @@
-.profile-container {
-    width: 100%;
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: none;
-}
-
-.profile-title {
+.signup-link-section {
     text-align: center;
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
-.error-message {
-    color: #e74c3c;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.profile-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-label {
+.signup-link {
+    color: #0070cb; 
     font-size: 1rem;
-    font-weight: 600;
-    color: #333;
+    text-decoration: none;
 }
 
-input,
-textarea {
-    width: 100%;
-    padding: 12px;
-    font-size: 1rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    transition: border-color 0.3s ease;
+.signup-link:hover {
+    color: #0062a3;
 }
 
-input[type="file"] {
-    padding: 8px;
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
-    color: #0070cb;
-    font-size: 1rem;
-}
-
-input[type="file"]:focus {
-    outline: none;
-}
-
-input:focus,
-textarea:focus {
-    outline: none;
-    border-color: #0070cb;
-}
-
-textarea {
-    resize: vertical;
-    min-height: 100px;
-}
-
-.profile-button {
-    background-color: #0070cb;
-    color: white;
-    font-size: 1rem;
-    padding: 8px 24px;
-    border: none;
-    border-radius: 9999px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    align-self: center;
-}
-
-.profile-button:hover {
-    background-color: #005fa3;
-}
-
-.profile-button:active {
-    background-color: #003f73;
-}
-
-input[type="file"] {
-    display: none;
+.signup-link:active {
+    color: #004085; 
 }

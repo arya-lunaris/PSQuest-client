@@ -2,6 +2,22 @@
 
 body {
   background-color: white;
+  margin: 0; 
+  position: relative;
+}
+
+.content-container {
+  padding-top: 75px; 
+  flex-grow: 1; 
+}
+
+body.auth-page {
+  background-image: url('https://imgur.com/8yrIKyZ.png');
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  min-height: 100vh;
 }
 
 footer {
@@ -9,5 +25,5 @@ footer {
   font-size: 1rem;
   color: #4a5568;
   padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+  padding-bottom: 0;
 }

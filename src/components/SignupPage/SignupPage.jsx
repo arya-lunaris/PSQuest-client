@@ -110,19 +110,6 @@ export default function Signup() {
           />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="profile_picture">Profile Picture</label>
-          <label className="profile-picture-label" htmlFor="file-upload">
-            Add Profile Image
-          </label>
-          <input
-            type="file"
-            name="profile_picture"
-            id="file-upload"
-            onChange={handleChange}
-          />
-        </div>
-
         <button
           className="profile-button"
           disabled={
@@ -135,6 +122,10 @@ export default function Signup() {
           {loading ? 'Signing Up...' : 'Sign Up'}
         </button>
       </form>
+
+      <div className="login-link-section">
+        <p><a href="/login" className="login-link">Already have an account? Log In</a></p>
+      </div>
     </section>
   );
 }
