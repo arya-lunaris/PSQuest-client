@@ -122,7 +122,7 @@ const SearchPage = () => {
             onChange={handleSearchChange}
             className="searchInput"
           />
-          <button type="submit" className="btn-thin">
+          <button type="submit" className="btn-search">
             <img src="https://imgur.com/sjDimfB.png" alt="Search" className="search-image" />
           </button>
         </form>
