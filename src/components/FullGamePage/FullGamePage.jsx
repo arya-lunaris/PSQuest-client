@@ -86,7 +86,7 @@ const FullGamePage = () => {
     try {
       await removeGameFromUser(usergameId);
       setIsRemoveModalOpen(true);
-      navigate(-1);
+      setTimeout(() => navigate(-1), 1000);
     } catch (error) {
       setError("Failed to delete game.");
     }
