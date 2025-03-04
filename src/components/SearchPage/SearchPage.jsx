@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";  
 import { gameFetchFromIGDB } from "../../services/gameService";  
 import { saveGameFromIGDB } from "../../services/usergameService"; 
@@ -8,77 +8,84 @@ import Modal from "../../components/Modal/Modal";
 import "./SearchPage.css";
 
 const SearchPage = () => {
-  const { user } = useContext(UserContext); 
+  const { user } = useContext(UserContext);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [searchTerm, setSearchTerm] = useState(""); 
-  const [games, setGames] = useState([]);  
-  const [loading, setLoading] = useState(false); 
-  const [error, setError] = useState(""); 
-  const [searched, setSearched] = useState(false); 
-  
+  const savedSearchTerm = sessionStorage.getItem("searchTerm") || "";
+  const savedGames = JSON.parse(sessionStorage.getItem("games")) || [];
+
+  const [searchTerm, setSearchTerm] = useState(searchParams.get("query") || savedSearchTerm);
+  const [games, setGames] = useState(savedGames);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [searched, setSearched] = useState(!!savedSearchTerm || !!searchParams.get("query"));
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
 
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value); 
-  };
+  useEffect(() => {
+    const handlePageRefresh = () => {
+      sessionStorage.removeItem("searchTerm");
+      sessionStorage.removeItem("games");
+    };
   
-  const handleSearchSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!searchTerm.trim()) {
-      setError("Please enter a search term");
-      return;
-    }
-
+    window.addEventListener("beforeunload", handlePageRefresh);
+    return () => window.removeEventListener("beforeunload", handlePageRefresh);
+  }, []);
+  
+  const fetchGames = async (query) => {
     setLoading(true);
     setError("");
-    setSearched(true); 
+    setSearched(true);
 
     try {
-      const response = await gameFetchFromIGDB(searchTerm);
-        
-      if (response.data) {
-        setGames(response.data);
-      } else {
-        setGames(response);
-      }
+      const response = await gameFetchFromIGDB(query);
+      const fetchedGames = response.data || response;
+
+      setGames(fetchedGames);
+      sessionStorage.setItem("searchTerm", query);
+      sessionStorage.setItem("games", JSON.stringify(fetchedGames)); 
     } catch (error) {
       setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
   };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
   
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (!searchTerm.trim()) {
+      setError("Please enter a search term");
+      return;
+    }
+
+    setSearchParams({ query: searchTerm });
+    fetchGames(searchTerm);
+  };
+
   const handleAddToCollection = async (game) => {
     try {
-      const gameWithStatus = { ...game, status: 'collection' };  
-      const response = await saveGameFromIGDB(gameWithStatus); 
-      
-      if (response?.message.includes("already")) {
-        setModalMessage("Game is already in your collection!");
-      } else {
-        setModalMessage("Game added to collection!");
-      }
+      const gameWithStatus = { ...game, status: 'collection' };
+      const response = await saveGameFromIGDB(gameWithStatus);
+
+      setModalMessage(response?.message.includes("already") ? "Game is already in your collection!" : "Game added to collection!");
       setIsModalOpen(true);
-      
     } catch (error) {
       console.error("Failed to add game to collection", error);
     }
   };
-  
+
   const handleAddToWishlist = async (game) => {
     try {
-      const gameWithStatus = { ...game, status: 'wishlist' };  
-      const response = await saveGameFromIGDB(gameWithStatus); 
-      
-      if (response?.message.includes("already")) {
-        setModalMessage("Game is already in your wishlist!");
-      } else {
-        setModalMessage("Game added to wishlist!");
-      }
+      const gameWithStatus = { ...game, status: 'wishlist' };
+      const response = await saveGameFromIGDB(gameWithStatus);
+
+      setModalMessage(response?.message.includes("already") ? "Game is already in your wishlist!" : "Game added to wishlist!");
       setIsModalOpen(true);
-      
     } catch (error) {
       console.error("Failed to add game to wishlist", error);
     }
@@ -88,11 +95,7 @@ const SearchPage = () => {
     return (
       <div className="searchPage">
         <div className="image-container">
-          <img 
-            src="https://imgur.com/qZWr1EO.png" 
-            alt="Banner" 
-            className="banner-image"
-          />
+          <img src="https://imgur.com/qZWr1EO.png" alt="Banner" className="banner-image" />
           <h1 className="title">Search for Games</h1>
         </div>
   
@@ -109,11 +112,7 @@ const SearchPage = () => {
   return (
     <div className="searchPage">
       <div className="image-container">
-        <img 
-          src="https://imgur.com/qZWr1EO.png" 
-          alt="Banner" 
-          className="banner-image"
-        />
+        <img src="https://imgur.com/qZWr1EO.png" alt="Banner" className="banner-image" />
         <h1 className="title">Search for Games</h1>
         <form onSubmit={handleSearchSubmit} className="searchForm">
           <input
@@ -124,11 +123,7 @@ const SearchPage = () => {
             className="searchInput"
           />
           <button type="submit" className="btn-thin">
-            <img 
-              src="https://imgur.com/sjDimfB.png" 
-              alt="Search" 
-              className="search-image"
-            />
+            <img src="https://imgur.com/sjDimfB.png" alt="Search" className="search-image" />
           </button>
         </form>
       </div>
