@@ -22,8 +22,8 @@ const HomePage = () => {
       </header>
 
       {!user ? (
-        <section className="text-center mb-8">
-          <h2 className="text-2xl text-gray-800">Sign Up Now!</h2>
+        <section className="text-center mb-8" style={{ marginTop: '-40px' }}>
+        <h2 className="text-2xl text-gray-800">Sign Up Now!</h2>
           <p className="text-gray-700 mt-2 mb-4">Join PSQuest and start tracking your PlayStation games today!</p>
           <div className="flex justify-center space-x-4">
             <Link to="/signup">

@@ -5,6 +5,10 @@
     margin-bottom: 80px !important;
 }
 
+.collection-messages p {
+    margin-top: 150px !important;
+}
+
 .collectionPage {
     display: flex;
     flex-direction: column;
@@ -28,7 +32,7 @@
 
 .collection-login-message {
     text-align: center;
-    margin-top: 175px !important;
+    margin-top: 120px !important;
 }
 
 .collection-login-message p {

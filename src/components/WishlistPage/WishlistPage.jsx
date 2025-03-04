@@ -62,7 +62,7 @@ const WishlistPage = () => {
       ) : (
         <div className="gameResults">
           {wishlistGames.length === 0 ? (
-            <p>No games in your wishlist.</p>
+            <p>No games in your wishlist</p>
           ) : (
             wishlistGames.map((userGame) => {
               const game = userGame.game;  

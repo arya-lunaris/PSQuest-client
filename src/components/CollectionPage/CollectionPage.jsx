@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { getUserGamesByStatus, removeGameFromUser } from "../../services/usergameService";
+import { getUserGamesByStatus, removeGameFromUser, getFilteredGames } from "../../services/usergameService";
 import GameCard from "../../components/GameCard/GameCard"; 
 import { useNavigate, Link } from "react-router-dom";  
 import { UserContext } from "../../contexts/UserContext";
@@ -15,9 +15,9 @@ const CollectionPage = () => {
   useEffect(() => {
     if (!user) return;  
 
-    const fetchCollectionGames = async () => {
+    const fetchFilteredGamesFromAPI = async () => {
       try {
-        const games = await getUserGamesByStatus('collection', gameStatus);
+        const games = await getFilteredGames('collection', gameStatus);
         setCollectionGames(games);
       } catch (error) {
         console.error("Error fetching collection games", error);
@@ -26,7 +26,7 @@ const CollectionPage = () => {
       }
     };
 
-    fetchCollectionGames();
+    fetchFilteredGamesFromAPI();
   }, [user, gameStatus]);
 
   const handleRemoveFromCollection = async (userGameId) => {
@@ -72,22 +72,27 @@ const CollectionPage = () => {
           </div>
 
           {collectionGames.length === 0 ? (
-            <p>No games in your collection.</p>
+            <div className="collection-messages">
+              {gameStatus === 'completed' ? (
+                <p>No games you have completed</p>
+              ) : gameStatus === 'currently_playing' ? (
+                <p>No games you're currently playing</p>
+              ) : gameStatus === 'not_started' ? (
+                <p>No games you haven't started yet</p>
+              ) : (
+                <p>No games in your collection</p> 
+              )}
+            </div>
           ) : (
             collectionGames.map((userGame) => {
               const game = userGame.game;  
-              const genres = Array.isArray(game.genres) ? game.genres.join(", ") : game.genres || 'Genres unavailable';
               return (
                 <GameCard
                   key={userGame.id}
                   game={{
                     id: game.id,
                     title: game.title,
-                    image: game.cover || 'placeholder.jpg',
-                    releaseDate: game.first_release_date || 'Release Date unavailable',
-                    rating: game.total_rating ? game.total_rating.toFixed(1) : 'Rating unavailable',
-                    genres: genres,
-                    storyline: game.storyline || 'Storyline unavailable.',
+                    image: game.cover || 'placeholder.jpg', 
                   }}
                   userGameId={userGame.id} 
                   type="collection"

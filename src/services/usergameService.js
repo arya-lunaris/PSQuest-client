@@ -31,6 +31,21 @@ export const getUserGamesByStatus = async (status) => {
     }
 };
 
+export const getFilteredGames = async (status, gameStatus) => {
+  try {
+      const queryParams = gameStatus ? `?game_status=${gameStatus}` : '';
+      const response = await axios.get(`${BASE_URL}/status/${status}${queryParams}`, {
+          headers: {
+              Authorization: `Bearer ${getToken()}`,
+          },
+      });
+      return response.data;
+  } catch (error) {
+      console.error("Error fetching filtered user games:", error);
+      throw error;
+  }
+};
+
 export const removeGameFromUser = async (gameId) => {
     try {
         const response = await axios.delete(`${BASE_URL}/${gameId}/`, {

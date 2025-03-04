@@ -26,9 +26,13 @@
     width: 100%;
 }
 
+.gameResults p {
+    margin-top: 180px;
+}
+
 .wishlist-login-message {
     text-align: center;
-    margin-top: 175px !important;
+    margin-top: 150px !important;
 }
 
 .wishlist-login-message p {
