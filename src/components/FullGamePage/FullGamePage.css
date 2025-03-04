@@ -68,7 +68,7 @@
     align-items: center;
     padding: 20px;
     border-radius: 8px;
-    margin-top: 180px; /* remove if wanting to add achievments */
+    margin-top: 140px; /* remove if wanting to add achievments */
 }
 
 .full-game-status {
@@ -178,6 +178,12 @@
 
 .btn-remove.red-btn:active {
     border: 2px solid #e53e3e !important;
+}
+
+.feedback-title {
+    font-family: 'PlaystationFont';
+    margin-bottom: 20px;
+    font-size: 1.5rem;
 }
 
 @media screen and (max-width: 1600px) {

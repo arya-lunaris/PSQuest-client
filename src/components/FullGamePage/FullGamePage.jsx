@@ -13,9 +13,11 @@ const FullGamePage = () => {
   const [error, setError] = useState(null);
   const [rating, setRating] = useState("");
   const [review, setReview] = useState("");
+  const [gameStatus, setGameStatus] = useState("");
   const [pageStatus, setPageStatus] = useState("");
   const [isMoveModalOpen, setIsMoveModalOpen] = useState(false);
   const [isRemoveModalOpen, setIsRemoveModalOpen] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,6 +33,7 @@ const FullGamePage = () => {
         setRating(gameDetails.rating || "");
         setReview(gameDetails.review || "");
         setPageStatus(gameDetails.page_status || "");
+        setGameStatus(gameDetails.game_status || "");
       } catch (error) {
         setError("Failed to fetch game details.");
       } finally {
@@ -50,8 +53,14 @@ const FullGamePage = () => {
     }
 
     try {
-      const updatedData = { rating, review, page_status: pageStatus };
+      let updatedData = { game_status: gameStatus, review };
+      if (rating) {
+        updatedData.rating = Number(rating);
+      }
+
       await updateUserGame(usergameId, updatedData);
+      setUserGameDetails((prev) => ({ ...prev, ...updatedData }));
+      setIsUpdateModalOpen(true);
     } catch (error) {
       setError("Failed to update game details.");
     }
@@ -61,8 +70,8 @@ const FullGamePage = () => {
     try {
       const updatedData = { page_status: 'collection' };
       await updateUserGame(usergameId, updatedData);
-      setPageStatus('collection');
       setIsMoveModalOpen(true);
+      setPageStatus('collection');
     } catch (error) {
       console.error("Failed to move game to collection", error);
     }
@@ -77,16 +86,14 @@ const FullGamePage = () => {
     try {
       await removeGameFromUser(usergameId);
       setIsRemoveModalOpen(true);
-      setTimeout(() => navigate(-1), 1000);
+      navigate(-1);
     } catch (error) {
       setError("Failed to delete game.");
     }
   };
 
   if (loading) return <p>Loading...</p>;
-
   if (error) return <p>{error}</p>;
-
   if (!userGameDetails) return <p>Game details not found.</p>;
 
   const { game } = userGameDetails;
@@ -113,9 +120,10 @@ const FullGamePage = () => {
       <div className="full-game-right">
         {pageStatus !== "wishlist" && (
           <>
+            <h2 className="feedback-title">Feedback</h2>
             <div className="full-game-status">
               <label>Game Status:</label>
-              <select value={pageStatus} onChange={(e) => setPageStatus(e.target.value)}>
+              <select value={gameStatus} onChange={(e) => setGameStatus(e.target.value)}>
                 <option value="not_started">Not Started</option>
                 <option value="currently_playing">Currently Playing</option>
                 <option value="completed">Completed</option>
@@ -126,7 +134,7 @@ const FullGamePage = () => {
 
               <label>Review:</label>
               <textarea value={review} onChange={(e) => setReview(e.target.value)} />
-            </div>
+              </div>
 
             <div className="full-game-buttons">
               <button onClick={handleUpdate}>Update</button>
@@ -149,6 +157,12 @@ const FullGamePage = () => {
           Remove Game
         </button>
       </div>
+
+      <Modal
+        isOpen={isUpdateModalOpen}
+        onClose={() => setIsUpdateModalOpen(false)}
+        message="Feedback was updated!"
+      />
 
       <Modal
         isOpen={isMoveModalOpen}

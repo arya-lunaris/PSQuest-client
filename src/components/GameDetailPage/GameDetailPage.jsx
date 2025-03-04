@@ -3,6 +3,7 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import { gameShow } from "../../services/gameService";
 import { saveGameFromIGDB } from "../../services/usergameService";
+import Modal from "../../components/Modal/Modal"; // 
 import "./GameDetailPage.css";
 
 const GameDetailPage = () => {
@@ -11,6 +12,8 @@ const GameDetailPage = () => {
     const [gameDetails, setGameDetails] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false); 
+    const [modalMessage, setModalMessage] = useState("");  
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -57,8 +60,12 @@ const GameDetailPage = () => {
                 releaseDate: formatDate(gameDetails.releaseDate)
             };
             await saveGameFromIGDB({ ...formattedGameDetails, status: "wishlist" });
+            setModalMessage("Game added to wishlist!");
+            setIsModalOpen(true); 
         } catch (error) {
             console.error("Failed to add game to wishlist", error);
+            setModalMessage("Failed to add game to wishlist.");
+            setIsModalOpen(true); 
         }
     };
 
@@ -69,8 +76,12 @@ const GameDetailPage = () => {
                 releaseDate: formatDate(gameDetails.releaseDate)
             };
             await saveGameFromIGDB({ ...formattedGameDetails, status: "collection" });
+            setModalMessage("Game added to collection!");
+            setIsModalOpen(true); 
         } catch (error) {
             console.error("Failed to add game to collection", error);
+            setModalMessage("Failed to add game to collection.");
+            setIsModalOpen(true);
         }
     };
 
@@ -116,6 +127,12 @@ const GameDetailPage = () => {
                     <button onClick={handleAddToWishlist} className="btn-move-to-wishlist">Add to Wishlist</button>
                 </div>
             </div>
+
+            <Modal 
+                isOpen={isModalOpen} 
+                onClose={() => setIsModalOpen(false)} 
+                message={modalMessage} 
+            />
         </div>
     );
 };
