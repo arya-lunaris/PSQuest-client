@@ -2,7 +2,7 @@
     font-family: 'PlayStationFont', sans-serif;
     font-size: 2.5rem !important;
     margin-top: 20px !important;
-    margin-bottom: 50px !important;
+    margin-bottom: 80px !important;
 }
 
 .collectionPage {
@@ -35,4 +35,36 @@
     font-size: 1.2rem;
     color: #333;
     margin-bottom: 20px;
+}
+
+.filter {
+    top: 21.5%; 
+    position: absolute;
+    left: 46.5%; 
+    transform: translateY(-50%); 
+    width: 160px; 
+    padding-right: 20px; 
+}
+
+.filter label {
+    display: block;
+    font-weight: lighter;
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.filter select {
+    padding: 8px;
+    font-size: 13px;
+    width: 100%; 
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: border-color 0.3s ease;
+    text-align: center;
+}
+
+.filter select:focus {
+    border-color: #007bff;
 }

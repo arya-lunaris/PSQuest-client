@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";  
 import { gameFetchFromIGDB } from "../../services/gameService";  

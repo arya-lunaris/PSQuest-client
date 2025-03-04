@@ -9,6 +9,7 @@ const CollectionPage = () => {
   const { user } = useContext(UserContext);
   const [collectionGames, setCollectionGames] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [gameStatus, setGameStatus] = useState("all"); 
   const navigate = useNavigate();  
 
   useEffect(() => {
@@ -16,7 +17,7 @@ const CollectionPage = () => {
 
     const fetchCollectionGames = async () => {
       try {
-        const games = await getUserGamesByStatus('collection');
+        const games = await getUserGamesByStatus('collection', gameStatus);
         setCollectionGames(games);
       } catch (error) {
         console.error("Error fetching collection games", error);
@@ -26,7 +27,7 @@ const CollectionPage = () => {
     };
 
     fetchCollectionGames();
-  }, [user]);
+  }, [user, gameStatus]);
 
   const handleRemoveFromCollection = async (userGameId) => {
     try {
@@ -41,13 +42,17 @@ const CollectionPage = () => {
     navigate(`/game/${userGameId}`);
   };
 
+  const handleGameStatusChange = (e) => {
+    setGameStatus(e.target.value); 
+  };
+
   return (
     <div className="collectionPage">
       <h1 className="collection-title">Your Collection</h1>
 
       {!user ? (
         <div className="collection-login-message">
-          <p>Log in see your collection!</p>
+          <p>Log in to see your collection!</p>
           <Link to="/login">
             <button className="btn-thin">Login</button>
           </Link>
@@ -56,6 +61,16 @@ const CollectionPage = () => {
         <p>Loading...</p>
       ) : (
         <div className="gameResults">
+          <div className="filter">
+            <label>Filter Games:</label>
+            <select value={gameStatus} onChange={handleGameStatusChange}>
+              <option value="all">All</option>
+              <option value="not_started">Not Started</option>
+              <option value="currently_playing">Currently Playing</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+
           {collectionGames.length === 0 ? (
             <p>No games in your collection.</p>
           ) : (
