@@ -66,7 +66,6 @@ const WishlistPage = () => {
           ) : (
             wishlistGames.map((userGame) => {
               const game = userGame.game;  
-              const genres = Array.isArray(game.genres) ? game.genres.join(", ") : game.genres || "Genres unavailable";
               return (
                 <GameCard
                   key={userGame.id} 
@@ -74,10 +73,6 @@ const WishlistPage = () => {
                     id: game.id,
                     title: game.title,
                     image: game.cover || "placeholder.jpg",
-                    releaseDate: game.first_release_date || "Release Date unavailable",
-                    rating: game.total_rating ? game.total_rating.toFixed(1) : "Rating unavailable",
-                    genres: genres,
-                    storyline: game.storyline || "Storyline unavailable.",
                   }}
                   userGameId={userGame.id} 
                   type="wishlist"

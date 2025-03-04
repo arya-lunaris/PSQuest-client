@@ -1,31 +1,34 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../../contexts/UserContext"; 
+import { UserContext } from "../../contexts/UserContext";
 import { removeToken } from '../../utils/auth';
-import './Navbar.css'; 
+import './Navbar.css';
 
 export default function Navbar() {
-  const { user, setUser } = useContext(UserContext); 
-  const navigate = useNavigate(); 
+  const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    removeToken(); 
-    setUser(null); 
-    navigate("/"); 
+    sessionStorage.removeItem("searchTerm");
+    sessionStorage.removeItem("games");
+    removeToken();
+    setUser(null);
+    navigate("/");
+
   };
 
   return (
     <nav className="navbar">
       <div className="logo-container">
         <Link to="/">
-          <img 
-            src="https://imgur.com/70qb3aU.png" 
-            alt="PSQuest Logo" 
+          <img
+            src="https://imgur.com/70qb3aU.png"
+            alt="PSQuest Logo"
             className="logo"
           />
         </Link>
       </div>
-      
+
       <ul className="navLinks">
         <li>
           <Link to="/" className="navLink">Home</Link>

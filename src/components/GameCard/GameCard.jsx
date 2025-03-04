@@ -30,16 +30,6 @@ const GameCard = ({ game, userGameId, type, onAddToCollection, onAddToWishlist, 
             <button className="btn-add" onClick={() => onAddToCollection(game)}>Add to Collection</button>
             <button className="btn-add" onClick={() => onAddToWishlist(game)}>Add to Wishlist</button>
           </>
-        // ) : type === "wishlist" ? (
-        //   <>
-        //     <button className="btn-add" onClick={() => onMoveToCollection(game)}>Move to Collection</button>
-        //     <button className="btn-remove" onClick={() => onRemove(game)}>Remove</button>
-        //   </>
-        // ) : type === "collection" ? (
-        //   <>
-        //     <button className="btn-add" onClick={() => onViewGame(game.id)}>View Game</button>
-        //     <button className="btn-remove red-btn" onClick={() => onRemove(game.id)}>Remove Game</button>
-        //   </>
         ) : null}
       </div>
     </div>
