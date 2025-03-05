@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
-import { profile, getUserProfile } from "../../services/userService";
+import { getUserProfile, updateUserProfile } from "../../services/userService";
 import './ProfilePage.css';
 
 export default function UpdateProfile() {
@@ -20,6 +20,23 @@ export default function UpdateProfile() {
 
     const [errors, setErrors] = useState({});
 
+    const fetchUserProfile = async () => {
+        try {
+            const fetchedUser = await getUserProfile();
+            console.log("Fetched user profile:", fetchedUser);
+            setFormData({
+                username: fetchedUser.username || "",
+                email: fetchedUser.email || "",
+                bio: fetchedUser.bio ?? "",  
+                password: "",
+                password_confirmation: ""
+            });
+        } catch (error) {
+            console.error("Error fetching profile:", error);
+            setErrors({ general: "Failed to load profile data." });
+        }
+    };
+
     useEffect(() => {
         if (!user) {
             navigate("/login");
@@ -31,13 +48,8 @@ export default function UpdateProfile() {
             return;
         }
 
-        setFormData({
-            username: user.username || "",
-            email: user.email || "",
-            bio: user.bio ?? "", 
-            password: "",
-            password_confirmation: ""
-        });
+        fetchUserProfile();
+
     }, [user, userId, navigate]);
 
     const handleChange = (event) => {
@@ -59,7 +71,7 @@ export default function UpdateProfile() {
         }
 
         try {
-            await profile(updatedFormData);
+            await updateUserProfile(updatedFormData);
 
             const updatedUser = await getUserProfile();
             setUser(updatedUser);

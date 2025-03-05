@@ -27,7 +27,7 @@ export const login = async (formData) => {
     }
 };
 
-export const profile = async (formData) => {
+export const updateUserProfile = async (formData) => {
     const token = getToken();
 
     try {
