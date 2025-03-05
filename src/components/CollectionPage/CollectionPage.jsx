@@ -50,6 +50,16 @@ const CollectionPage = () => {
     <div className="collectionPage">
       <h1 className="collection-title">Your Collection</h1>
 
+      <div className="filter">
+        <label>Filter Games:</label>
+        <select value={gameStatus} onChange={handleGameStatusChange}>
+          <option value="all">All</option>
+          <option value="not_started">Not Started</option>
+          <option value="currently_playing">Currently Playing</option>
+          <option value="completed">Completed</option>
+        </select>
+      </div>
+
       {!user ? (
         <div className="collection-login-message">
           <p>Log in to see your collection!</p>
@@ -61,16 +71,6 @@ const CollectionPage = () => {
         <p>Loading...</p>
       ) : (
         <div className="gameResults">
-          <div className="filter">
-            <label>Filter Games:</label>
-            <select value={gameStatus} onChange={handleGameStatusChange}>
-              <option value="all">All</option>
-              <option value="not_started">Not Started</option>
-              <option value="currently_playing">Currently Playing</option>
-              <option value="completed">Completed</option>
-            </select>
-          </div>
-
           {collectionGames.length === 0 ? (
             <div className="collection-messages">
               {gameStatus === 'completed' ? (
@@ -109,3 +109,4 @@ const CollectionPage = () => {
 };
 
 export default CollectionPage;
+

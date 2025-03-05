@@ -42,12 +42,13 @@
 }
 
 .filter {
-    top: 21.5% !important; 
     position: absolute;
-    left: 46.5%; 
-    transform: translateY(-50%); 
-    width: 160px; 
-    padding-right: 20px; 
+    top: 185px;
+    left: 50.7%;
+    transform: translateX(-50%);
+    z-index: 10;
+    width: 160px;
+    padding-right: 20px;
 }
 
 .filter label {
