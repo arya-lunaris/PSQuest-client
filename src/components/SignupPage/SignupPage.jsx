@@ -4,7 +4,7 @@ import { setToken } from '../../utils/auth';
 import { getUserFromToken } from '../../utils/auth';
 import { UserContext } from '../../contexts/UserContext';
 import { signup } from '../../services/userService';
-import './SignupPage.css';  
+import './SignupPage.css';
 
 export default function Signup() {
   const { setUser } = useContext(UserContext);
@@ -14,30 +14,41 @@ export default function Signup() {
     password: '',
     password_confirmation: '',
     bio: '',
-    profile_picture: '' 
+    profile_picture: ''
   });
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const data = await signup(formData); 
-      setToken(data.token); 
-      setUser(getUserFromToken()); 
-      navigate('/login'); 
+      const data = await signup(formData);
+      setToken(data.token);
+      setUser(getUserFromToken());
+      navigate('/');
     } catch (error) {
-      setErrors(error.response.data.errors); 
+      setErrors(error.response?.data || {});
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
   const handleChange = (e) => {
-    setErrors({ ...errors, [e.target.name]: '' }); 
-    setFormData({ ...formData, [e.target.name]: e.target.value }); 
+    setErrors({ ...errors, [e.target.name]: '' });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const isFormValid = () => {
+    const { username, email, password, password_confirmation } = formData;
+    return (
+      username &&
+      email &&
+      password &&
+      password_confirmation &&
+      password === password_confirmation
+    );
   };
 
   return (
@@ -56,7 +67,7 @@ export default function Signup() {
           />
           {errors.username && <p className="error-message">{errors.username}</p>}
         </div>
-        
+
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
@@ -81,23 +92,24 @@ export default function Signup() {
             onChange={handleChange}
           />
           {errors.password && <p className="error-message">{errors.password}</p>}
+          {errors.non_field_errors && errors.non_field_errors.map((error, index) => (
+            <p key={index} className="error-message">{error}</p>
+          ))}
         </div>
 
         <div className="form-group">
           <label htmlFor="password_confirmation">Confirm password</label>
           <input
             type="password"
-            name="password_confirmation"  
+            name="password_confirmation"
             id="password_confirmation"
             placeholder="Re-type the password"
             required
             onChange={handleChange}
           />
-          {formData.password &&
-            formData.password_confirmation &&
-            formData.password !== formData.password_confirmation && (
-              <p className="error-message">Passwords do not match</p>
-            )}
+          {formData.password && formData.password_confirmation && formData.password !== formData.password_confirmation && (
+            <p className="error-message">Passwords do not match.</p>
+          )}
         </div>
 
         <div className="form-group">
@@ -112,11 +124,7 @@ export default function Signup() {
 
         <button
           className="profile-button"
-          disabled={
-            formData.password === '' ||
-            formData.password !== formData.password_confirmation ||  
-            loading
-          }
+          disabled={!isFormValid() || loading}
           type="submit"
         >
           {loading ? 'Signing Up...' : 'Sign Up'}
@@ -124,7 +132,9 @@ export default function Signup() {
       </form>
 
       <div className="login-link-section">
-        <p><a href="/login" className="login-link">Already have an account? Log In</a></p>
+        <p>
+          <a href="/login" className="login-link">Already have an account? Log In</a>
+        </p>
       </div>
     </section>
   );

@@ -25,11 +25,18 @@ export default function Login() {
             setUser(getUserFromToken());
             navigate('/');
         } catch (error) {
-            setErrors(error.response?.data || { general: 'Invalid login credentials' });
+            console.error("Login Error:", error.response);
+
+            if (error.response?.status === 401) {
+                setErrors({ general: 'Invalid username, email, or password' });
+            } else {
+                setErrors({ general: 'An unexpected error occurred' });
+            }
         } finally {
             setLoading(false);
         }
     };
+
 
     const handleChange = (e) => {
         setErrors({ ...errors, [e.target.name]: '' });

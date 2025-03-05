@@ -16,3 +16,7 @@
 .signup-link:active {
     color: #004085; 
 }
+
+.error-message {
+    color: #e74c3c;
+}
