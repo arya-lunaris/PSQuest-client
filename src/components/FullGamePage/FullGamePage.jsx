@@ -161,7 +161,7 @@ const FullGamePage = () => {
       <Modal
         isOpen={isUpdateModalOpen}
         onClose={() => setIsUpdateModalOpen(false)}
-        message="Feedback was updated!"
+        message="Feedback updated!"
       />
 
       <Modal

@@ -2,12 +2,15 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import { getUserProfile, updateUserProfile } from "../../services/userService";
+import Modal from "../../components//Modal/Modal";
 import './ProfilePage.css';
 
 export default function UpdateProfile() {
     const { user, setUser } = useContext(UserContext);
     const { userId } = useParams();
     const navigate = useNavigate();
+    const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+
 
     const [formData, setFormData] = useState({
         username: "",
@@ -79,7 +82,7 @@ export default function UpdateProfile() {
             await updateUserProfile(updatedFormData);
             const updatedUser = await getUserProfile();
             setUser(updatedUser);
-            navigate("/collection");
+            setIsUpdateModalOpen(true);
         } catch (error) {
             if (error.response && error.response.data) {
                 const errorData = error.response.data;
@@ -147,6 +150,13 @@ export default function UpdateProfile() {
                     <p className="error-message">{errors.message}</p>
                 )}
             </form>
+
+            <Modal
+        isOpen={isUpdateModalOpen}
+        onClose={() => setIsUpdateModalOpen(false)}
+        message="Profile updated!"
+      />
+
         </div>
     );
 }
