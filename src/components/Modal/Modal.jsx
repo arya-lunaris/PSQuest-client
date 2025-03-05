@@ -20,7 +20,7 @@ const Modal = ({ isOpen, onClose, message }) => {
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
         transition={{ duration: 0.3 }}
-        className="bg-white p-4 rounded-lg shadow-xl w-50 text-center"
+        className="bg-white p-4 rounded-lg shadow-xl w-50 text-center border border-gray-300"
       >
         <p className="text-sm">{message}</p>
       </motion.div>

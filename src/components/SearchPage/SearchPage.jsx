@@ -95,7 +95,7 @@ const SearchPage = () => {
     return (
       <div className="searchPage">
         <div className="image-container">
-          <img src="https://imgur.com/qZWr1EO.png" alt="Banner" className="banner-image" />
+          <img src="https://imgur.com/n1Yzom5.png" alt="Banner" className="banner-image" />
           <h1 className="title">Search for Games</h1>
         </div>
   
@@ -112,7 +112,7 @@ const SearchPage = () => {
   return (
     <div className="searchPage">
       <div className="image-container">
-        <img src="https://imgur.com/qZWr1EO.png" alt="Banner" className="banner-image" />
+        <img src="https://imgur.com/n1Yzom5.png" alt="Banner" className="banner-image" />
         <h1 className="title">Search for Games</h1>
         <form onSubmit={handleSearchSubmit} className="searchForm">
           <input

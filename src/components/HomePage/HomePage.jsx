@@ -22,8 +22,8 @@ const HomePage = () => {
       </header>
 
       {!user ? (
-        <section className="text-center mb-8" style={{ marginTop: '-40px' }}>
-        <h2 className="text-2xl text-gray-800">Sign Up Now!</h2>
+        <section className="text-center mb-8" style={{ marginTop: '-90px' }}>
+          <h2 className="text-2xl text-gray-800">Sign Up Now!</h2>
           <p className="text-gray-700 mt-2 mb-4">Join PSQuest and start tracking your PlayStation games today!</p>
           <div className="flex justify-center space-x-4">
             <Link to="/signup">
@@ -34,9 +34,11 @@ const HomePage = () => {
             </Link>
           </div>
         </section>
+
       ) : (
+
         <>
-          <section className="text-center mb-8">
+          <section className="text-center mb-8 section-two">
             <h2 className="text-2xl text-gray-800">See What's Out There</h2>
             <p className="text-gray-700 mt-2 mb-4">Explore the best games on PlayStation!</p>
             <img
@@ -47,9 +49,9 @@ const HomePage = () => {
             <Link to="/search">
               <button className="btn-thin">Start Looking</button>
             </Link>
-
           </section>
-          <nav className="mb-8 text-center">
+
+          <nav className="mb-8 text-center section-three">
             <h2 className="text-2xl text-gray-800">Navigate</h2>
             <p className="text-gray-700 mt-2 mb-4">See your collection and update your profile!</p>
             <img
@@ -66,6 +68,7 @@ const HomePage = () => {
               </li>
             </ul>
           </nav>
+
         </>
       )}
     </div>

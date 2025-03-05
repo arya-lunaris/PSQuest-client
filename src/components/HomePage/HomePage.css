@@ -75,7 +75,7 @@ a {
 .home-image {
     max-width: 65%;
     margin-top: 40px;
-    margin-bottom: -10px;
+    margin-bottom: 0px;
     transition: max-width 0.3s ease;
 }
 
@@ -124,10 +124,35 @@ nav ul {
 
 @media (min-width: 1024px) {
     .home-image {
-        max-width: 40%;
+        max-width: 45%;
     }
 
     header h1 {
         font-size: 3rem !important;
     }
 }
+
+section.section-two {
+    background-color: #121314;
+    width: 100%;
+    padding: 80px 0;
+    border-top: 5px solid #121314; 
+    border-bottom: 20px solid #121314; 
+  }
+
+.section-two p, h2 {
+    color: white;
+}
+
+section.section-two img {
+    width: 1000px;
+}
+
+nav.section-three img {
+    width: 700px;
+}
+
+nav.section-three h2 {
+    color: #1a202c;
+}
+
