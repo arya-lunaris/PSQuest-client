@@ -45,7 +45,7 @@ export default function Login() {
 
     return (
         <section className="profile-container">
-            <h1 className="profile-title">Welcome Back</h1>
+            <h1 className="profile-title">Log In</h1>
             <form onSubmit={handleSubmit} className="profile-form">
                 <div className="form-group">
                     <label htmlFor="identifier">Username or Email</label>
