@@ -4,6 +4,7 @@ import { UserContext } from "../../contexts/UserContext";
 import { getFullUserGame, updateUserGame, removeGameFromUser } from "../../services/usergameService";
 import Modal from "../../components//Modal/Modal";
 import './FullGamePage.css';
+import StarRating from "../../components//StarRating/StarRating";
 
 const FullGamePage = () => {
   const { user } = useContext(UserContext);
@@ -129,12 +130,13 @@ const FullGamePage = () => {
                 <option value="completed">Completed</option>
               </select>
 
-              <label>Rating (1-5):</label>
-              <input type="number" min="1" max="5" value={rating} onChange={(e) => setRating(e.target.value)} />
+              <label>Rating:</label>
+              <StarRating rating={rating} setRating={setRating} />
+
 
               <label>Review:</label>
               <textarea value={review} onChange={(e) => setReview(e.target.value)} />
-              </div>
+            </div>
 
             <div className="full-game-buttons">
               <button onClick={handleUpdate}>Update</button>
