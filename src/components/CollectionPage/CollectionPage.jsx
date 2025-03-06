@@ -50,16 +50,6 @@ const CollectionPage = () => {
     <div className="collectionPage">
       <h1 className="collection-title">Your Collection</h1>
 
-      <div className="filter">
-        <label>Filter Games:</label>
-        <select value={gameStatus} onChange={handleGameStatusChange}>
-          <option value="all">All</option>
-          <option value="not_started">Not Started</option>
-          <option value="currently_playing">Currently Playing</option>
-          <option value="completed">Completed</option>
-        </select>
-      </div>
-
       {!user ? (
         <div className="collection-login-message">
           <p>Log in to see your collection!</p>
@@ -67,46 +57,59 @@ const CollectionPage = () => {
             <button className="btn-thin">Login</button>
           </Link>
         </div>
-      ) : loading ? (
-        <p>Loading...</p>
       ) : (
-        <div className="gameResults">
-          {collectionGames.length === 0 ? (
-            <div className="collection-messages">
-              {gameStatus === 'completed' ? (
-                <p>No games you have completed</p>
-              ) : gameStatus === 'currently_playing' ? (
-                <p>No games you're currently playing</p>
-              ) : gameStatus === 'not_started' ? (
-                <p>No games you haven't started yet</p>
+        <>
+          <div className="filter">
+            <label>Filter Games:</label>
+            <select value={gameStatus} onChange={handleGameStatusChange}>
+              <option value="all">All</option>
+              <option value="not_started">Not Started</option>
+              <option value="currently_playing">Currently Playing</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <div className="gameResults">
+              {collectionGames.length === 0 ? (
+                <div className="collection-messages">
+                  {gameStatus === 'completed' ? (
+                    <p>No games you have completed</p>
+                  ) : gameStatus === 'currently_playing' ? (
+                    <p>No games you're currently playing</p>
+                  ) : gameStatus === 'not_started' ? (
+                    <p>No games you haven't started yet</p>
+                  ) : (
+                    <p>No games in your collection</p> 
+                  )}
+                </div>
               ) : (
-                <p>No games in your collection</p> 
+                collectionGames.map((userGame) => {
+                  const game = userGame.game;  
+                  return (
+                    <GameCard
+                      key={userGame.id}
+                      game={{
+                        id: game.id,
+                        title: game.title,
+                        image: game.cover || 'placeholder.jpg', 
+                      }}
+                      userGameId={userGame.id} 
+                      type="collection"
+                      onRemove={() => handleRemoveFromCollection(userGame.id)}
+                      onViewGame={() => handleViewGame(userGame.id)}  
+                    />
+                  );
+                })
               )}
             </div>
-          ) : (
-            collectionGames.map((userGame) => {
-              const game = userGame.game;  
-              return (
-                <GameCard
-                  key={userGame.id}
-                  game={{
-                    id: game.id,
-                    title: game.title,
-                    image: game.cover || 'placeholder.jpg', 
-                  }}
-                  userGameId={userGame.id} 
-                  type="collection"
-                  onRemove={() => handleRemoveFromCollection(userGame.id)}
-                  onViewGame={() => handleViewGame(userGame.id)}  
-                />
-              );
-            })
           )}
-        </div>
+        </>
       )}
     </div>
   );
 };
 
 export default CollectionPage;
-

@@ -3,16 +3,17 @@
     padding: 0 !important;
     margin: 30px !important;
     border-radius: 8px !important;
-    width: 200px !important;
+    width: 250px !important;
     text-align: center !important;
     position: relative !important;
     transition: all 0.3s ease !important;
     box-shadow: none !important;
+    margin-bottom: 10px !important;
 }
 
 .game-card-image-container {
     width: 100% !important;
-    height: 200px !important;
+    height: 250px !important;
     border-radius: 8px !important;
     overflow: hidden !important;
     cursor: pointer !important;
@@ -26,21 +27,21 @@
     object-fit: cover !important;
     border-radius: 8px !important;
     display: block !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease !important; 
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
 }
 
 .game-card:hover .game-card-image-container {
-    transform: scale(1.0) !important; 
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important; 
+    transform: scale(1.0) !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
 }
 
 .game-card:hover .game-card-image {
-    transform: scale(1.03) !important; 
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important; 
+    transform: scale(1.03) !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
 }
 
 .game-card-title {
-    font-size: 1rem !important; 
+    font-size: 1rem !important;
     font-weight: lighter !important;
     color: black !important;
     margin: 10px 0 !important;
@@ -51,44 +52,54 @@
 }
 
 .game-card-buttons {
+    position: absolute !important;
+    bottom: 10px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
     display: flex !important;
     justify-content: space-between !important;
-    margin-top: -10px !important;
+    width: 60% !important;
+    gap: 20px !important;
+    z-index: 2 !important;
 }
 
-.game-card-buttons button {
-    margin: 5px !important;
-    width: 48% !important;
-    background-color: transparent !important;
-    border: 2px solid transparent !important;
-    transition: background-color 0.3s ease, border 0.3s ease !important;
+.game-card-buttons.search {
+    margin-top: -95px !important;
+    margin-bottom: -20px !important;
+}
+
+.game-card-buttons.wishlist,
+.game-card-buttons.collection {
+    margin-top: -55px !important; 
+    margin-bottom: -15px !important;
+}
+
+.icon-btn {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: none !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: blur(8px) !important;
+    transition: background-color 0.3s ease, transform 0.2s ease !important;
     cursor: pointer !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
 
-.btn-add:active {
-    border: 2px solid #0070cb !important;
+.icon-btn:hover {
+    background: rgba(255, 255, 255, 0.6) !important;
 }
 
-.btn-add,
-.btn-remove {
-    font-family: sans-serif !important;
-    color: #0070cb !important;
-    font-size: 0.875rem !important;
-    padding: 4px 12px !important;
-    border-radius: 9999px !important;
-    text-decoration: none !important;
+.icon-btn:active {
+    transform: scale(1) !important;
 }
 
-.btn-add:hover,
-.btn-remove:hover {
-    background-color: #e0e0e0 !important;
-}
-
-.btn-remove {
-    color: #e53e3e !important;
-    border: 2px solid #e53e3e !important;
-}
-
-.btn-remove:active {
-    border: 2px solid #e53e3e !important;
+.icon {
+    width: 30px !important;
+    height: 30px !important;
+    object-fit: contain !important;
+    transform: scale(1.5) !important;
 }
