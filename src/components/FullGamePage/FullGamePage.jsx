@@ -122,7 +122,7 @@ const FullGamePage = () => {
         {pageStatus !== "wishlist" && (
           <>
             {gameStatus === "completed" && (
-              <h2 className="feedback-title">Feedback</h2>
+              <h2 className="feedback-title">What did you think?</h2>
             )}
             <div className="full-game-status">
               <label>Game Status:</label>
