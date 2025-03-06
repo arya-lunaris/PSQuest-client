@@ -115,20 +115,43 @@
     text-align: center;
 }
 
-.wishlist-collection-info p {
+.btn-move-to-wishlist,
+.btn-move-to-collection {
+    margin-bottom: 10px;
+    cursor: pointer;
+    padding: 3px 20px;
     font-size: 1rem;
-    color: #555;
-    margin-bottom: 15px;
+    border-radius: 9999px;
+    background-color: #0070cb;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative; 
 }
 
-.btn-move-to-wishlist {
-    margin-bottom: 10px; 
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  
-  .btn-move-to-collection {
-    margin-bottom: 10px; 
-    cursor: pointer;
-  }
+.btn-move-to-wishlist:hover,
+.btn-move-to-collection:hover {
+    background-color: #005fa3;
+}
+
+.btn-move-to-wishlist:hover::before,
+.btn-move-to-collection:hover::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border: 2px solid #005fa3;
+    border-radius: 100px;
+    z-index: -1;
+}
+
+.wishlist-collection-info {
+    display: flex;
+    gap: 10px; 
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: center; 
+}
 

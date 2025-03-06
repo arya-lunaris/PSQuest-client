@@ -12,8 +12,8 @@ const GameDetailPage = () => {
     const [gameDetails, setGameDetails] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false); 
-    const [modalMessage, setModalMessage] = useState("");  
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalMessage, setModalMessage] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -61,11 +61,11 @@ const GameDetailPage = () => {
             };
             await saveGameFromIGDB({ ...formattedGameDetails, status: "wishlist" });
             setModalMessage("Game added to wishlist!");
-            setIsModalOpen(true); 
+            setIsModalOpen(true);
         } catch (error) {
             console.error("Failed to add game to wishlist", error);
             setModalMessage("Failed to add game to wishlist.");
-            setIsModalOpen(true); 
+            setIsModalOpen(true);
         }
     };
 
@@ -77,7 +77,7 @@ const GameDetailPage = () => {
             };
             await saveGameFromIGDB({ ...formattedGameDetails, status: "collection" });
             setModalMessage("Game added to collection!");
-            setIsModalOpen(true); 
+            setIsModalOpen(true);
         } catch (error) {
             console.error("Failed to add game to collection", error);
             setModalMessage("Failed to add game to collection.");
@@ -122,16 +122,18 @@ const GameDetailPage = () => {
 
             <div className="full-game-right">
                 <div className="wishlist-collection-info">
-                    <p>Add this game to your wishlist or collection!</p>                    
-                    <button onClick={handleAddToCollection} className="btn-move-to-collection">Add to Collection</button>
-                    <button onClick={handleAddToWishlist} className="btn-move-to-wishlist">Add to Wishlist</button>
+                    <p>Add this game to your wishlist or collection!</p>
+                    <div className="button-container">
+                        <button onClick={handleAddToCollection} className="btn-move-to-collection">Add to Collection</button>
+                        <button onClick={handleAddToWishlist} className="btn-move-to-wishlist">Add to Wishlist</button>
+                    </div>
                 </div>
             </div>
 
-            <Modal 
-                isOpen={isModalOpen} 
-                onClose={() => setIsModalOpen(false)} 
-                message={modalMessage} 
+            <Modal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                message={modalMessage}
             />
         </div>
     );

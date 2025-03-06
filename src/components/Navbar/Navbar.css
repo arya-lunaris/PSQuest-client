@@ -66,12 +66,26 @@
     transition: background-color 0.3s ease;
     display: inline-block;
     margin-left: 16px; 
-    line-height: 1; 
+    line-height: 1;
+    position: relative; 
 }
 
 .logoutButton:hover {
     background-color: #005fa3; 
 }
+
+.logoutButton:hover::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border: 2px solid #005fa3; 
+    border-radius: 9999px; 
+    z-index: -1; 
+}
+
 
 .navLinks li:last-child {
     margin-left: 16px;
