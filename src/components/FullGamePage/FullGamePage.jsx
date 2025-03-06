@@ -2,9 +2,9 @@ import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import { getFullUserGame, updateUserGame, removeGameFromUser } from "../../services/usergameService";
-import Modal from "../../components//Modal/Modal";
+import Modal from "../../components/Modal/Modal";
 import './FullGamePage.css';
-import StarRating from "../../components//StarRating/StarRating";
+import StarRating from "../../components/StarRating/StarRating";
 
 const FullGamePage = () => {
   const { user } = useContext(UserContext);
@@ -121,7 +121,9 @@ const FullGamePage = () => {
       <div className="full-game-right">
         {pageStatus !== "wishlist" && (
           <>
-            <h2 className="feedback-title">Feedback</h2>
+            {gameStatus === "completed" && (
+              <h2 className="feedback-title">Feedback</h2>
+            )}
             <div className="full-game-status">
               <label>Game Status:</label>
               <select value={gameStatus} onChange={(e) => setGameStatus(e.target.value)}>
@@ -130,12 +132,15 @@ const FullGamePage = () => {
                 <option value="completed">Completed</option>
               </select>
 
-              <label>Rating:</label>
-              <StarRating rating={rating} setRating={setRating} />
+              {gameStatus === "completed" && (
+                <>
+                  <label>Rating:</label>
+                  <StarRating rating={rating} setRating={setRating} />
 
-
-              <label>Review:</label>
-              <textarea value={review} onChange={(e) => setReview(e.target.value)} />
+                  <label>Review:</label>
+                  <textarea value={review} onChange={(e) => setReview(e.target.value)} />
+                </>
+              )}
             </div>
 
             <div className="full-game-buttons">
@@ -160,11 +165,21 @@ const FullGamePage = () => {
         </button>
       </div>
 
-      <Modal
-        isOpen={isUpdateModalOpen}
-        onClose={() => setIsUpdateModalOpen(false)}
-        message="Feedback updated!"
-      />
+      {gameStatus === "completed" && (
+        <Modal
+          isOpen={isUpdateModalOpen}
+          onClose={() => setIsUpdateModalOpen(false)}
+          message="Feedback updated!"
+        />
+      )}
+
+      {gameStatus !== "completed" && (
+        <Modal
+          isOpen={isUpdateModalOpen}
+          onClose={() => setIsUpdateModalOpen(false)}
+          message="Game status updated!"
+        />
+      )}
 
       <Modal
         isOpen={isMoveModalOpen}
