@@ -3,7 +3,7 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import { gameShow } from "../../services/gameService";
 import { saveGameFromIGDB } from "../../services/usergameService";
-import Modal from "../../components/Modal/Modal"; // 
+import Modal from "../../components/Modal/Modal";
 import "./GameDetailPage.css";
 
 const GameDetailPage = () => {
@@ -49,16 +49,35 @@ const GameDetailPage = () => {
         fetchGameDetails();
     }, [gameId, user, navigate, gameFromState]);
 
-    const formatDate = (date) => {
-        return new Date(date).toISOString().split('T')[0];
+    const formatDisplayDate = (date) => {
+        if (date === "Unavailable" || !date || isNaN(new Date(date))) return "Unavailable";
+        const d = new Date(date);
+        const day = String(d.getDate()).padStart(2, '0');
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const year = d.getFullYear();
+        return `${day}-${month}-${year}`;
+    };
+
+    const formatSubmitDate = (date) => {
+        if (date === "Unavailable" || !date || isNaN(new Date(date))) return null;
+        const d = new Date(date);
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
     };
 
     const handleAddToWishlist = async () => {
         try {
             const formattedGameDetails = {
                 ...gameDetails,
-                releaseDate: formatDate(gameDetails.releaseDate)
+                releaseDate: formatSubmitDate(gameDetails.releaseDate)
             };
+
+            if (formattedGameDetails.releaseDate === "Unavailable") {
+                formattedGameDetails.releaseDate = null;
+            }
+
             await saveGameFromIGDB({ ...formattedGameDetails, status: "wishlist" });
             setModalMessage("Game added to wishlist!");
             setIsModalOpen(true);
@@ -73,8 +92,13 @@ const GameDetailPage = () => {
         try {
             const formattedGameDetails = {
                 ...gameDetails,
-                releaseDate: formatDate(gameDetails.releaseDate)
+                releaseDate: formatSubmitDate(gameDetails.releaseDate)
             };
+
+            if (formattedGameDetails.releaseDate === "Unavailable") {
+                formattedGameDetails.releaseDate = null;
+            }
+
             await saveGameFromIGDB({ ...formattedGameDetails, status: "collection" });
             setModalMessage("Game added to collection!");
             setIsModalOpen(true);
@@ -100,16 +124,16 @@ const GameDetailPage = () => {
                 />
                 <div className="full-game-details">
                     <p>
-                        <strong>Release Date:</strong>{" "}
-                        {gameDetails.releaseDate !== "Unavailable" ? gameDetails.releaseDate.toLocaleDateString() : "Unavailable"}
+                        <strong>Release Date:</strong>
+                        {` ${formatDisplayDate(gameDetails.releaseDate)}`}
                     </p>
                     <p>
-                        <strong>Rating:</strong>{" "}
-                        {gameDetails.rating !== "Unavailable" ? gameDetails.rating.toFixed(1) : "Unavailable"}
+                        <strong>Rating:</strong>
+                        {gameDetails.rating !== "Unavailable" ? ` ${gameDetails.rating.toFixed(1)}` : " Unavailable"}
                     </p>
                     <p>
-                        <strong>Genres:</strong>{" "}
-                        {gameDetails.genres || "Unavailable"}
+                        <strong>Genres:</strong>
+                        {gameDetails.genres ? ` ${gameDetails.genres}` : " Unavailable"}
                     </p>
                     <p>
                         <strong>Description:</strong>

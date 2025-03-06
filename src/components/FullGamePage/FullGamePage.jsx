@@ -99,13 +99,17 @@ const FullGamePage = () => {
 
   const { game } = userGameDetails;
 
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString("en-GB");
+  };
+
   return (
     <div className="full-game-page">
       <div className="full-game-left">
         <h1 className="full-game-title">{game?.title || "Game Title Unavailable"}</h1>
         <img className="full-game-cover" src={game?.cover || "placeholder.jpg"} alt={game?.title || "No Cover"} />
         <div className="full-game-details">
-          <p><strong>Release Date:</strong> {game?.first_release_date || "Unavailable"}</p>
+          <p><strong>Release Date:</strong> {game?.first_release_date ? formatDate(game.first_release_date) : "Unavailable"}</p>
           <p><strong>Rating:</strong> {game?.total_rating ? game.total_rating.toFixed(1) : "Unavailable"}</p>
           <p><strong>Genres:</strong> {Array.isArray(game?.genres) && game.genres.length ? game.genres.join(", ") : "Unavailable"}</p>
 
