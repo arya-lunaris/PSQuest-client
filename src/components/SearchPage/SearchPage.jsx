@@ -94,9 +94,8 @@ const SearchPage = () => {
   if (!user) {
     return (
       <div className="searchPage">
-        <div className="image-container">
-          <img src="https://imgur.com/n1Yzom5.png" alt="Banner" className="banner-image" />
-          <h1 className="title">Search for Games</h1>
+        <div className="search-banner">
+          <h1 className="search-title">Search for Games</h1>
         </div>
   
         <div className="search-login-message">
@@ -111,9 +110,8 @@ const SearchPage = () => {
 
   return (
     <div className="searchPage">
-      <div className="image-container">
-        <img src="https://imgur.com/n1Yzom5.png" alt="Banner" className="banner-image" />
-        <h1 className="title">Search for Games</h1>
+      <div className="search-banner">
+        <h1 className="search-title">Search for Games</h1>
         <form onSubmit={handleSearchSubmit} className="searchForm">
           <input
             type="text"

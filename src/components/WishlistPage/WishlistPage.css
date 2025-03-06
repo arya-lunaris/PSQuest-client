@@ -1,42 +1,49 @@
-.wishlist-title {
+.wishlist-banner {
+    background-image: url('https://imgur.com/n1Yzom5.png');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: -20px;
+    margin-bottom: 40px;
+  }
+  
+  .wishlist-title {
     font-family: 'PlayStationFont', sans-serif;
-    font-size: 2.5rem !important;
-    margin-top: 20px !important;
-    margin-bottom: 50px !important;
-}
-
-.wishlistPage {
+    font-size: 3rem;
+    color: white;
+  }
+  
+  .wishlistPage {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
-}
-
-.wishlistPage h1 {
+  }
+  
+  .wishlist-login-message {
     text-align: center;
-    font-size: 2rem;
+    margin-top: 30px;
+  }
+  
+  .wishlist-login-message p {
+    font-size: 1.2rem;
+    color: #333;
     margin-bottom: 20px;
-    color: #1a202c;
-}
-
-.gameResults {
+  }
+  
+  .gameResults {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-}
-
-.gameResults p {
+  }
+  
+  .gameResults p {
     margin-top: 180px;
-}
-
-.wishlist-login-message {
-    text-align: center;
-    margin-top: 150px !important;
-}
-
-.wishlist-login-message p {
-    font-size: 1.2rem;
-    color: #333;
-    margin-bottom: 20px;
-}
+  }
+  

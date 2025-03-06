@@ -48,13 +48,15 @@ const CollectionPage = () => {
 
   return (
     <div className="collectionPage">
-      <h1 className="collection-title">Your Collection</h1>
+      <div className="banner-container">
+        <h1 className="collection-title">Your Collection</h1>
+      </div>
 
       {!user ? (
         <div className="collection-login-message">
           <p>Log in to see your collection!</p>
           <Link to="/login">
-            <button className="btn-thin">Login</button>
+            <button className="btn-thin">Go to Login</button>
           </Link>
         </div>
       ) : (

@@ -2,47 +2,38 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0;
-  padding: 0;
+  width: 100%;
   position: relative;
-  width: 100%;
 }
 
-.image-container {
+.search-banner {
+  width: 100%;
+  height: 250px;
+  background-image: url('https://imgur.com/n1Yzom5.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  top: 0;
+  margin-bottom: 40px; 
 }
 
-.banner-image {
-  width: 100%;
-  height: auto;
-  max-height: 350px;
-  display: block;
-  margin-bottom: 40px;
-}
-
-.title {
+.search-title {
   font-family: 'PlayStationFont', sans-serif;
   font-size: 3rem;
   color: #fff;
-  position: absolute;
-  top: 20%;
-  width: 100%;
   text-align: center;
-  z-index: 10;
 }
 
 .searchForm {
   display: flex;
-  justify-content: center;
-  position: absolute;
-  top: 55%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 5;
+  align-items: center;
+  justify-content: center; 
+  width: 100%;
+  max-width: 600px; 
+  margin-top: 20px;
 }
 
 .searchInput {
@@ -51,19 +42,24 @@
   border: 1px solid #ccc;
   font-size: 1rem;
   color: white;
-  width: 500px;
-  margin-right: 10px;
+  width: 100%;
+  max-width: 500px;
+  background-color: rgba(0, 0, 0, 0.6);
+  text-align: center;
 }
 
 .btn-search {
-  display: inline-block;
-  background-color: #0070cb;
-  color: white;
-  transition: background-color 0.3s ease;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 100%;
   height: 50px;
   width: 50px;
+  background-color: #0070cb;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  margin-left: -20px;
+  margin-top: -15px;
 }
 
 .btn-search:hover {
@@ -74,32 +70,11 @@
   width: 25px;
 }
 
-.error {
-  font-size: 1rem;
-  color: #f56565;
-}
-
 .gameResults {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-3xl {
-  font-size: 2rem;
-}
-
-.text-gray-900 {
-  color: #1a202c;
-}
-
-.text-red-500 {
-  color: #f56565;
 }
 
 .search-login-message {
@@ -108,7 +83,7 @@
 }
 
 .search-login-message p {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   color: #333;
   margin-bottom: 10px;
 }

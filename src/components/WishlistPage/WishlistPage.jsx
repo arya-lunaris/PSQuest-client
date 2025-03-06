@@ -48,13 +48,15 @@ const WishlistPage = () => {
 
   return (
     <div className="wishlistPage">
-      <h1 className="wishlist-title">Your Wishlist</h1>
+      <div className="wishlist-banner">
+        <h1 className="wishlist-title">Your Wishlist</h1>
+      </div>
 
       {!user ? (
         <div className="wishlist-login-message">
           <p>Log in to see your wishlist!</p>
           <Link to="/login">
-            <button className="btn-thin">Login</button>
+            <button className="btn-thin">Go to Login</button>
           </Link>
         </div>
       ) : loading ? (
