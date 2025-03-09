@@ -1,0 +1,215 @@
+.full-game-page {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 10px;
+    gap: 40px;
+    margin-top: 15px;
+}
+
+.full-game-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.full-game-title {
+    font-family: 'PlaystationFont';
+    font-size: 2rem !important;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.full-game-cover {
+    width: 200px !important;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+.full-game-details {
+    text-align: left;
+    font-size: 0.95rem !important;
+    color: black;
+    line-height: 1.6;
+}
+
+.full-game-details p {
+    margin: 10px 0;
+}
+
+.scrollable-description {
+    max-height: 200px !important;
+    overflow-y: auto !important; 
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 3px !important;
+    margin-left: -10px; 
+}
+
+.scrollable-description p {
+    font-size: 0.95rem !important;
+    color: black;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.full-game-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 120px;
+}
+
+.full-game-right label {
+    font-weight: 400 !important;
+    margin-top: 30px !important;
+}
+
+.full-game-status {
+    width: 100%;
+    max-width: 400px;
+}
+
+.full-game-status label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+}
+
+.full-game-status select,
+.full-game-status input,
+.full-game-status textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    background-color: white;
+}
+
+.full-game-buttons button,
+.wishlist-info .btn-move-to-collection,
+.full-game-buttons button {
+    font-family: 'PlayStationFont', sans-serif !important;
+    background-color: #0070cb !important;
+    padding: 4px 16px !important;
+    border-radius: 100px !important;
+    font-size: 1rem !important;
+    color: white !important;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    border: none !important;
+}
+
+.full-game-buttons button:hover,
+.wishlist-info .btn-move-to-collection:hover {
+    background-color: #005fa3 !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.full-game-buttons button:hover::before,
+.wishlist-info .btn-move-to-collection:hover::before {
+    content: "" !important;
+    position: absolute !important;
+    top: -4px !important;
+    left: -4px !important;
+    right: -4px !important;
+    bottom: -4px !important;
+    border: 2px solid #005fa3 !important;
+    border-radius: 100px !important;
+    z-index: -1 !important;
+}
+
+.wishlist-info {
+    margin-top: 100px;
+    padding: 15px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.wishlist-info p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.wishlist-info .btn-move-to-collection {
+    background-color: #0070cb; 
+    color: white;
+    border: none;
+    padding: 3px 20px;
+    font-size: 1rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.wishlist-info .btn-move-to-collection:hover {
+    background-color: #005fa3;
+}
+
+.wishlist-info .btn-move-to-collection:active {
+    background-color: #003f73;
+}
+
+.delete-game-button-container {
+    position: absolute !important;
+    bottom: 45px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+}
+
+.btn-remove.red-btn {
+    font-family: sans-serif !important;
+    color: #e53e3e !important;
+    font-size: 0.875rem !important;
+    padding: 4px 12px !important;
+    border-radius: 9999px !important;
+    text-decoration: none !important;
+    border: 2px solid transparent !important;
+    background-color: transparent !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease, border 0.3s ease !important;
+}
+
+.btn-remove.red-btn:hover {
+    background-color: #e0e0e0 !important;
+}
+
+.btn-remove.red-btn:active {
+    border: 2px solid #e53e3e !important;
+}
+
+.feedback-title {
+    font-family: 'PlaystationFont';
+    font-size: 1.5rem;
+    color: #555;
+}
+
+@media screen and (max-width: 1600px) {
+    .delete-game-button-container {
+        bottom: 20px !important; 
+    }
+}

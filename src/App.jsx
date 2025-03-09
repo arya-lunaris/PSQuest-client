@@ -17,20 +17,24 @@ function App() {
 
   React.useEffect(() => {
     if (
-      location.pathname === '/signup' ||
-      location.pathname === '/login' ||
-      location.pathname.startsWith('/profile')
+      location.pathname === "/signup" ||
+      location.pathname === "/login" ||
+      location.pathname.startsWith("/profile")
     ) {
-      document.body.classList.add('auth-page');
+      document.body.classList.add("auth-page");
+    } else if (location.pathname.startsWith("/game")) {
+      document.body.classList.add("game-page");
     } else {
-      document.body.classList.remove('auth-page');
+      document.body.classList.remove("auth-page");
+      document.body.classList.remove("game-page");
     }
   }, [location]);
-
+  
   const shouldDisplayFooter = !(
     location.pathname === '/signup' ||
     location.pathname === '/login' ||
-    location.pathname.startsWith('/profile')
+    location.pathname.startsWith('/profile') ||
+    location.pathname.startsWith('/game')
   );
 
   return (

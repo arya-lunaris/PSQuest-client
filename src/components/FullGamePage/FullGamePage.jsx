@@ -142,7 +142,7 @@ const FullGamePage = () => {
                   <StarRating rating={rating} setRating={setRating} />
 
                   <label>Review:</label>
-                  <textarea value={review} onChange={(e) => setReview(e.target.value)} />
+                  <textarea className="review-box" value={review} onChange={(e) => setReview(e.target.value)} />
                 </>
               )}
             </div>
