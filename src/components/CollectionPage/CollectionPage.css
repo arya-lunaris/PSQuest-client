@@ -1,6 +1,6 @@
 .banner-container {
     position: relative;
-    background-image: url('https://imgur.com/n1Yzom5.png');
+    background-image: url('https://imgur.com/9qEfvJB.png');
     background-size: cover;
     background-position: center;
     height: 250px; 
@@ -19,6 +19,7 @@
     margin: 0;
     color: white; 
     text-align: center;
+    margin-top: -50px;
   }
   
   .collectionPage {
@@ -45,7 +46,7 @@
     background-color: rgba(255, 255, 255, 0.8); 
     padding: 10px;
     border-radius: 8px;
-    margin-top: -20px;
+    margin-top: -65px;
     width: 160px;
     margin-left: auto;
     margin-right: auto;

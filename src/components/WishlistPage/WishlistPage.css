@@ -1,5 +1,5 @@
 .wishlist-banner {
-    background-image: url('https://imgur.com/n1Yzom5.png');
+    background-image: url('https://imgur.com/9qEfvJB.png');
     background-size: cover;
     background-position: center;
     width: 100%;
@@ -16,6 +16,7 @@
     font-family: 'PlayStationFont', sans-serif;
     font-size: 3rem;
     color: white;
+    margin-top: -50px;
   }
   
   .wishlistPage {
