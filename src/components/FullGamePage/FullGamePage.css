@@ -44,6 +44,12 @@
     border-radius: 8px !important;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2) !important;
     margin-bottom: 20px !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.full-game-cover:hover {
+    transform: scale(1.08);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
 }
 
 .full-game-details {
@@ -66,7 +72,7 @@
     border-radius: 8px !important;
     margin-top: 3px !important;
     margin-left: -10px !important;
-    background: rgba(255, 255, 255, 0.1) !important;
+    background: transparent !important;
 }
 
 .scrollable-description::-webkit-scrollbar-track {
@@ -74,7 +80,7 @@
 }
 
 .scrollable-description::-webkit-scrollbar {
-    width: 8px !important; 
+    width: 8px !important;
 }
 
 .scrollable-description::-webkit-scrollbar-thumb {
